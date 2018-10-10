@@ -1,6 +1,7 @@
 package com.sevadevelopment.instructure.tests;
 
 import java.io.FileInputStream;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,6 +17,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import utilitypackage.LoginPage;
+
+
 public class TestGmailLogin {
 	WebDriver driver;
 	ArrayList<String> dLoginData = new ArrayList();
@@ -29,7 +33,8 @@ public class TestGmailLogin {
 
 	@BeforeClass
 	public void setupTestClass() throws InterruptedException {
-		System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromeDriver/chromedriver_linux_64"); //Use .exe driver file for windows os
+		System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromeDriver/chromedriver_win32/chromedriver(2.42 v68-70).exe");
+		//System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromeDriver/chromedriver_linux_64"); //Use .exe driver file for windows os
 		Thread.sleep(2000);
 		
 
@@ -102,6 +107,10 @@ public class TestGmailLogin {
 
 	@Test(dataProvider = "userData")
 	public void verifyThatInvalidPasswordDoesnotGetsAccess(String user, String pwd) {
+		
+		utilitypackage.LoginPage.EmailAddress(driver).sendKeys(user);
+		utilitypackage.LoginPage.Password(driver).sendKeys(pwd);
+		utilitypackage.LoginPage.Login(driver).click();
 //		WebElement emailField = driver.findElement(By.name("identifier"));
 //		String emailValue = emailCell.getStringCellValue();
 //		emailField.sendKeys(emailValue);
