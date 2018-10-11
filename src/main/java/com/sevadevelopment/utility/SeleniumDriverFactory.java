@@ -9,14 +9,14 @@ public class SeleniumDriverFactory  {
 
     public WebDriver getDriver(String browser) {
         WebDriver driver;
-        if(browser=="chrome") {
+        if(browser.equals("chrome")) {
             if (SystemUtils.IS_OS_LINUX)
                 System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromeDriver/chromedriver_linux_64");
             else if (SystemUtils.IS_OS_WINDOWS)
                 System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromeDriver/chromedriver_win32/chromedriver(2.42 v68-70).exe");
             driver = new ChromeDriver();
         }
-        else if (browser=="firefox") {
+        else if (browser.equals("firefox")) {
             if (SystemUtils.IS_OS_LINUX)
                 System.setProperty("webdriver.gecko.driver", "src/main/resources/drivers/geckoDriver/geckodriver");
             else if (SystemUtils.IS_OS_WINDOWS)
