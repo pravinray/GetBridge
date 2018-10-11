@@ -1,5 +1,7 @@
 package com.sevadevelopment.instructure.tests;
 
+import com.sevadevelopment.utility.Browser;
+
 public class BaseTest {
 
 	public BaseTest(Browser browser) {

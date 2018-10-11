@@ -36,6 +36,20 @@ public class ExcelUtility {
 		colCount = firstRow.getPhysicalNumberOfCells();
 	}
 
+	public ExcelUtility(String xlFilePath) throws IOException {
+		fis = new FileInputStream(xlFilePath);
+		workbook = new XSSFWorkbook(fis);
+		fis.close();
+
+		rowCount = sheet.getPhysicalNumberOfRows();
+		firstRow = sheet.getRow(0);
+		colCount = firstRow.getPhysicalNumberOfCells();
+	}
+
+	public void setSheet(String sheetName) {
+		this.sheet = workbook.getSheet(sheetName);
+	}
+
 	public String getCellData(int rowNum, int colNum) {
 		try {
 			cell = sheet.getRow(rowNum).getCell(colNum);
