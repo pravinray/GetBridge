@@ -8,6 +8,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -44,18 +45,24 @@ public class TestGmailLogin {
 
 		sheet1 = wb.getSheetAt(0);
 		rCount = sheet1.getPhysicalNumberOfRows();
-		System.out.println(rCount + " PhysicalNumberOfRows");
+
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+
 	}
 
 	@BeforeMethod
 	public void setupTestMethod() {
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
 		driver.get("https://www.qfxcinemas.com/Account/Login");
 	}
 
 	@AfterMethod
 	public void tearDownTestMethod() {
+		driver.manage().deleteAllCookies();
+	}
+
+	@AfterClass
+	public void tearDownTestClass() {
 		driver.quit();
 	}
 
