@@ -7,22 +7,29 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class SeleniumDriverFactory  {
 
-    public WebDriver getDriver(Browser browser) {
-        switch(browser) {
-            case chrome:
-                if(SystemUtils.IS_OS_LINUX)
-                    System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromeDriver/chromedriver_linux_64");
-                else if(SystemUtils.IS_OS_WINDOWS)
-                    System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromeDriver/chromedriver_win32/chromedriver(2.42 v68-70).exe");
-                return new ChromeDriver();
-            case firefox:
-            default:
-                if(SystemUtils.IS_OS_LINUX)
-                    System.setProperty("webdriver.gecko.driver", "src/main/resources/drivers/geckoDriver/geckodriver");
-                else if(SystemUtils.IS_OS_WINDOWS)
-                    System.setProperty("webdriver.gecko.driver", "src/main/resources/drivers/gechoDriver/geckodriver.exe");
-                return new FirefoxDriver();
-
+    public WebDriver getDriver(String browser) {
+        WebDriver driver;
+        if(browser=="chrome") {
+            if (SystemUtils.IS_OS_LINUX)
+                System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromeDriver/chromedriver_linux_64");
+            else if (SystemUtils.IS_OS_WINDOWS)
+                System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromeDriver/chromedriver_win32/chromedriver(2.42 v68-70).exe");
+            driver = new ChromeDriver();
         }
+        else if (browser=="firefox") {
+            if (SystemUtils.IS_OS_LINUX)
+                System.setProperty("webdriver.gecko.driver", "src/main/resources/drivers/geckoDriver/geckodriver");
+            else if (SystemUtils.IS_OS_WINDOWS)
+                System.setProperty("webdriver.gecko.driver", "src/main/resources/drivers/geckoDriver/geckodriver.exe");
+            driver =  new FirefoxDriver();
+        }
+        else {
+            if (SystemUtils.IS_OS_LINUX)
+                System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromeDriver/chromedriver_linux_64");
+            else if (SystemUtils.IS_OS_WINDOWS)
+                System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromeDriver/chromedriver_win32/chromedriver(2.42 v68-70).exe");
+            driver = new ChromeDriver();
+        }
+        return driver;
     }
 }

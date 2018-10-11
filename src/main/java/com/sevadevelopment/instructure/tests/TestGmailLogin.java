@@ -1,22 +1,17 @@
 package com.sevadevelopment.instructure.tests;
 
-import com.sevadevelopment.utility.Browser;
+import com.sevadevelopment.instructure.pageobjects.LoginPage;
+import com.sevadevelopment.utility.ExcelUtility;
 import com.sevadevelopment.utility.SeleniumDriverFactory;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
-import com.sevadevelopment.instructure.pageobjects.DashboardPage;
-import com.sevadevelopment.instructure.pageobjects.LoginPage;
-import com.sevadevelopment.utility.ExcelUtility;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
 
 public class TestGmailLogin{
 	WebDriver driver;
@@ -32,9 +27,28 @@ public class TestGmailLogin{
 
 	@BeforeClass
 	public void setupTestClass() throws InterruptedException {
-		driver = new SeleniumDriverFactory().getDriver(Browser.chrome);
+		Properties properties = new Properties();
+		FileInputStream fileInputStream = null;
+		try {
+			fileInputStream = new FileInputStream("src/main/resources/config.properties");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			properties.load(fileInputStream);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		System.out.println("================");
+		System.out.println(properties.getProperty("browser"));
+		System.out.println("================");
+
+
+		driver = new SeleniumDriverFactory().getDriver(properties.getProperty("browser"));
 		this.loginPage = new LoginPage(driver);
-		
+
 		driver.manage().window().maximize();
 		driver.get("https://www.qfxcinemas.com/Account/Login");
 
