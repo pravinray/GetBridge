@@ -61,21 +61,15 @@ public class ExcelApiTest
     }
 
 	public int getRowCount(String sheetName) {
-		// TODO Auto-generated method stub
 		sheet = workbook.getSheet(sheetName);
         int rCount = sheet.getPhysicalNumberOfRows();
-        System.out.println(rCount + "!!!!!!!!!!");
 		return rCount;
 	}
 	
 	public int getColumnCount(String sheetName) {
-		// TODO Auto-generated method stub
 		sheet = workbook.getSheet(sheetName);
 		Row row = sheet.getRow(0);
 		int colCount = row.getPhysicalNumberOfCells();
-		
-        //int colCount = sheet.getPhysicalNumberOfRows() - 1;
-        System.out.println(colCount + "@@@@@@@@@@@@@@@@");
 		return colCount;
 	}
 }

@@ -3,8 +3,6 @@ package com.sevadevelopment.instructure.tests;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -18,7 +16,6 @@ import org.testng.annotations.Test;
 
 public class TestGmailLogin {
 	WebDriver driver;
-	ArrayList<String> dLoginData = new ArrayList();
 	int rCount;
 	XSSFSheet sheet1;
 	XSSFCell userName;
@@ -29,10 +26,8 @@ public class TestGmailLogin {
 
 	@BeforeClass
 	public void setupTestClass() throws InterruptedException {
-		System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromeDriver/chromedriver_linux_64"); //Use .exe driver file for windows os
-		Thread.sleep(2000);
-		
-
+		// Use .exe driver file for windows os
+		System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromeDriver/chromedriver_linux_64");
 		FileInputStream fis = null;
 		try {
 			fis = new FileInputStream(xlFilePath);
@@ -57,57 +52,31 @@ public class TestGmailLogin {
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.get("https://www.qfxcinemas.com/Account/Login");
-
 	}
 
 	@AfterMethod
 	public void tearDownTestMethod() {
 		driver.quit();
 	}
-	 
-   
-	@DataProvider(name="userData") 
-    public Object[][] userFormData() throws Exception
-    {
-        //Object[][] data = testData(xlFilePath, sheetName);
-        //return data;
-        
-        Object[][] excelData = null;
-        eat = new ExcelApiTest(xlFilePath);
-        int rows = eat.getRowCount(sheetName);
-        int columns = eat.getColumnCount(sheetName);
-        
-        System.out.println(rows + " row count");
-        System.out.println(columns + " col count");
-                 
-        excelData = new Object[rows][columns];
-       
-        System.out.println(":::::::::::::::::::::::");
-         
-        for(int i=0; i<rows; i++)
-        {
-            for(int j=0; j<2; j++)
-            {
-                excelData[i][j] = eat.getCellData(sheetName, j, i);
-                System.out.print(excelData[i][j] + " ");
-                
-            }
-            System.out.println("-----------------------");
-             
-        }
-        
-        System.out.println(excelData.toString());
-        return excelData;
-    }
+
+	@DataProvider(name = "userData")
+	public Object[][] userFormData() throws Exception {
+		Object[][] excelData = null;
+		eat = new ExcelApiTest(xlFilePath);
+		int rows = eat.getRowCount(sheetName);
+		int columns = eat.getColumnCount(sheetName);
+		excelData = new Object[rows][columns];
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < 2; j++) {
+				excelData[i][j] = eat.getCellData(sheetName, j, i);
+				System.out.print(excelData[i][j] + " ");
+			}
+		}
+		return excelData;
+	}
 
 	@Test(dataProvider = "userData")
 	public void verifyThatInvalidPasswordDoesnotGetsAccess(String user, String pwd) {
-//		WebElement emailField = driver.findElement(By.name("identifier"));
-//		String emailValue = emailCell.getStringCellValue();
-//		emailField.sendKeys(emailValue);
-//		System.out.println(emailValue);
-//		WebElement nxtBtn = driver.findElement(By.xpath("//*[@id=\"identifierNext\"]/content/span"));
-//		nxtBtn.click();
 		System.out.println("user " + user);
 		System.out.println("password " + pwd);
 
