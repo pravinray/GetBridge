@@ -21,7 +21,7 @@ import com.sevadevelopment.utility.SeleniumDriverFactory;
 public class VideoPlayerDemo {
 	WebDriver driver;
 	Screen s = new Screen();
-	Pattern image = new Pattern("src/main/resources/sikuliImages/1540350821759.png");
+	Pattern image = new Pattern("src/main/resources/sikuliImages/1540383765278.png");
 
 	@BeforeClass
 	public void setupTestClass() throws InterruptedException {
