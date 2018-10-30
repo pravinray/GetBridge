@@ -2,9 +2,15 @@ package com.sevadevelopment.instructure.tests;
 
 import com.sevadevelopment.utility.ConfigUtility;
 import com.sevadevelopment.utility.SeleniumDriverFactory;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.sikuli.script.Pattern;
 import org.sikuli.script.Screen;
 import org.testng.annotations.AfterMethod;
@@ -24,8 +30,13 @@ public class VideoPlayerDemo {
 	}
 
 	@BeforeMethod
-	public void setupTestMethod() {
-		driver = new SeleniumDriverFactory().getDriver(configUtility.getConfig("browser"));
+	public void setupTestMethod() throws Exception {
+//		driver = new SeleniumDriverFactory().getDriver(configUtility.getConfig("browser"));
+		
+		//remote server for test execution
+		DesiredCapabilities dc = DesiredCapabilities.chrome();
+        driver = new RemoteWebDriver(new URL("http://172.19.0.1:17631/wd/hub"), dc);
+		
 		driver.manage().window().setSize(new Dimension(1024, 768));
 		driver.get("https://www.getbridge.com/?lead_source_description=instructure.com_");
 		JavascriptExecutor js = (JavascriptExecutor) driver;
