@@ -3,6 +3,7 @@
     <test name="Security Tests" preserve-order="true" >
         <classes>
             <class name="com.sevadevelopment.instructure.tests.TestGmailLogin" />
-        </classes>    
-</test>
+            <class name="com.sevadevelopment.instructure.tests.VideoPlayerDemo" />
+        </classes>
+    </test>
 </suite>

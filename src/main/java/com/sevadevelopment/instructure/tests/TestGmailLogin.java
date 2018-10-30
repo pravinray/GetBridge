@@ -1,17 +1,13 @@
 package com.sevadevelopment.instructure.tests;
 
 import com.sevadevelopment.instructure.pageobjects.LoginPage;
+import com.sevadevelopment.utility.ConfigUtility;
 import com.sevadevelopment.utility.ExcelUtility;
 import com.sevadevelopment.utility.SeleniumDriverFactory;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Properties;
 
 public class TestGmailLogin{
 	WebDriver driver;
@@ -23,32 +19,17 @@ public class TestGmailLogin{
 	String xlFilePath = "src/main/resources/testData/names.xlsx";
 	String sheetName = "Sheet1";
 	LoginPage loginPage;
+	ConfigUtility configUtility;
 	
 
 	@BeforeClass
-	public void setupTestClass() throws InterruptedException {
-		
-
-
+	public void setupTestClass() {
+		configUtility = new ConfigUtility();
 	}
 
 	@BeforeMethod
 	public void setupTestMethod() {
-//		driver.get("https://www.qfxcinemas.com/Account/Login");
-		Properties properties = new Properties();
-		FileInputStream fileInputStream = null;
-		try {
-			fileInputStream = new FileInputStream("src/main/resources/config.properties");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-
-		try {
-			properties.load(fileInputStream);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		driver = new SeleniumDriverFactory().getDriver(properties.getProperty("browser"));
+		driver = new SeleniumDriverFactory().getDriver(configUtility.getConfig("browser"));
 		this.loginPage = new LoginPage(driver);
 
 		driver.manage().window().maximize();
@@ -61,10 +42,6 @@ public class TestGmailLogin{
 		driver.quit();
 	}
 
-	@AfterClass
-	public void tearDownTestClass() {
-		
-	}
 
 	@DataProvider(name = "userData")
 	public Object[][] userFormData() throws Exception {

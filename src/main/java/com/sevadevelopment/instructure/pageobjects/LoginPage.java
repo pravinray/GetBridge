@@ -47,7 +47,6 @@ public class LoginPage extends BasePageObject{
 		loginButton.click();
 		
 		return new DashboardPage(driver);
-		
 	}
 	
 }
