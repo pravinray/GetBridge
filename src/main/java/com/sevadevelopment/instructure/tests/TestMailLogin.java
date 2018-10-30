@@ -13,14 +13,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
-public class TestGmailLogin{
+public class TestMailLogin{
 	WebDriver driver;
 	int rCount;
 	XSSFSheet sheet1;
 	XSSFCell userName;
 	XSSFCell password;
 	ExcelUtility eat = null;
-	String xlFilePath = "src/main/resources/testData/names.xlsx";
+	String xlFilePath = "src/main/resources/testData/mail.xlsx";
 	String sheetName = "Sheet1";
 	LoginPage loginPage;
 	
@@ -52,7 +52,7 @@ public class TestGmailLogin{
 		this.loginPage = new LoginPage(driver);
 
 		driver.manage().window().maximize();
-		driver.get("https://www.qfxcinemas.com/Account/Login");
+		driver.get("https://www.seek.com.au/sign-in");
 	}
 
 	@AfterMethod
