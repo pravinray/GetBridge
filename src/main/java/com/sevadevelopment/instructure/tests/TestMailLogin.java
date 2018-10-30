@@ -1,6 +1,6 @@
 package com.sevadevelopment.instructure.tests;
 
-import com.sevadevelopment.instructure.pageobjects.LoginPage;
+import com.sevadevelopment.instructure.pageobjects.LoginSeek;
 import com.sevadevelopment.utility.ExcelUtility;
 import com.sevadevelopment.utility.SeleniumDriverFactory;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -22,11 +22,12 @@ public class TestMailLogin{
 	ExcelUtility eat = null;
 	String xlFilePath = "src/main/resources/testData/mail.xlsx";
 	String sheetName = "Sheet1";
-	LoginPage loginPage;
+	LoginSeek loginPage;
+	
 	
 
 	@BeforeClass
-	public void setupTestClass() throws InterruptedException {
+	public void setupTestClass() {
 		
 
 
@@ -49,7 +50,7 @@ public class TestMailLogin{
 			e.printStackTrace();
 		}
 		driver = new SeleniumDriverFactory().getDriver(properties.getProperty("browser"));
-		this.loginPage = new LoginPage(driver);
+		this.loginPage = new LoginSeek(driver);
 
 		driver.manage().window().maximize();
 		driver.get("https://www.seek.com.au/sign-in");
@@ -77,6 +78,7 @@ public class TestMailLogin{
 	public void verifyThatInvalidPasswordDoesnotGetsAccess(String user, String pwd) throws Exception {
 		try {
 			this.loginPage.doLogin(user, pwd);
+			System.out.println("Username = "+user+" Password = "+pwd);
 		} catch(Exception e) {
 			e.getMessage();
 		}
