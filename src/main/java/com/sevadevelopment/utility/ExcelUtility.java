@@ -94,7 +94,7 @@ public class ExcelUtility {
 		
 		excelData = new Object[rowCount][colCount];
 		for (int i = 0; i < rowCount; i++) {
-			for (int j = 0; j < 2; j++) {
+			for (int j = 0; j < 4; j++) {
 				excelData[i][j] = getCellData(i, j);
 			}
 		}
