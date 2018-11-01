@@ -1,21 +1,25 @@
 package com.sevadevelopment.instructure.tests;
 
-import com.sevadevelopment.utility.ConfigUtility;
-import com.sevadevelopment.utility.SeleniumDriverFactory;
+import static org.testng.Assert.assertTrue;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.sikuli.script.Pattern;
-import org.sikuli.script.Screen;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import com.sevadevelopment.utility.ConfigUtility;
+import com.sevadevelopment.utility.SeleniumDriverFactory;
+
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+
 public class VideoPlayerDemo {
 	WebDriver driver;
-	Screen s = new Screen();
-	Pattern image = new Pattern("src/main/resources/sikuliImages/1540383765278.png");
 	ConfigUtility configUtility;
 
 	@BeforeClass
@@ -24,10 +28,10 @@ public class VideoPlayerDemo {
 	}
 
 	@BeforeMethod
-	public void setupTestMethod() {
+	public void setupTestMethod() throws Exception {
 		driver = new SeleniumDriverFactory().getDriver(configUtility.getConfig("browser"));
 		driver.manage().window().setSize(new Dimension(1024, 768));
-		driver.get("https://www.getbridge.com/?lead_source_description=instructure.com_");
+		driver.get("https://www.getbridge.com");
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0, 400)", "");
 	}
@@ -38,17 +42,22 @@ public class VideoPlayerDemo {
 		driver.quit();
 	}
 
-	@Test(description = "To verify player play/pause button")
+	@Test(description = "To verify video source is available")
 	public void verifyPlayerPlayPause() throws Exception {
-
-		// click on play button
-		s.click(image);
-
-		// verify pause button is visible
-		s.exists("src/main/resources/sikuliImages/1540380781770.png");
-
-		// verify volume/setting/fullscreen button is visible
-		s.exists("src/main/resources/sikuliImages/1540381250940.png");
+		
+		String elementval = driver.findElement(By.className("paragraph-play-button")).getAttribute("data-wistiaid");
+		System.out.println("WISTIA-VIDEO-ID: " + elementval);
+		
+		RestAssured.baseURI = "https://fast.wistia.net/embed/iframe/" + elementval;
+		RequestSpecification httpRequest = RestAssured.given();
+		Response response = httpRequest.get();
+		
+		String contentType = response.header("Content-Type");
+		System.out.println("Header body response type: " + contentType);
+		
+		assertTrue(contentType.contains("text/html"));
+		
+		
 
 	}
 }
