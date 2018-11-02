@@ -4,6 +4,9 @@
         <classes>
             <class name="com.sevadevelopment.instructure.tests.TestGmailLogin" />
             <class name="com.sevadevelopment.instructure.tests.VideoPlayerDemo" />
+            <class name="com.sevadevelopment.instructure.tests.TestMailLogin" />
+            <class name="com.sevadevelopment.instructure.tests.TestRequestDemoForm" />
+            <class name="com.sevadevelopment.instructure.tests.TestSeekRegister" />
         </classes>
     </test>
 </suite>
