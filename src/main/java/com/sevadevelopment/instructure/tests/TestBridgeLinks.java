@@ -2,16 +2,21 @@
 
 package com.sevadevelopment.instructure.tests;
 
+import static org.testng.Assert.assertEquals;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
 import com.sevadevelopment.instructure.pageobjects.BridgePage;
 import com.sevadevelopment.utility.ConfigUtility;
 import com.sevadevelopment.utility.SeleniumDriverFactory;
+
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -62,14 +67,16 @@ public class TestBridgeLinks{
             
             url = it.next().getAttribute("href");
             
-            System.out.println(url);
+           // System.out.println(url);
         
             if(url == null || url.isEmpty()){
-System.out.println("URL is either not configured for anchor tag or it is empty");
+            	System.out.println(url);
+                System.out.println("URL is either not configured for anchor tag or it is empty");
                 continue;
             }
             
             if(!url.startsWith(homePage)){
+            	System.out.println(url);
                 System.out.println("URL belongs to another domain, skipping it.");
                 continue;
             }
@@ -83,12 +90,15 @@ System.out.println("URL is either not configured for anchor tag or it is empty")
                 
                 respCode = huc.getResponseCode();
                 
-                if(respCode >= 400){
-                    System.out.println(url+" is a broken link");
+                Assert.assertEquals(respCode,200);
+                
+                if(respCode > 200){
+                	Assert.assertTrue(false);
+
                 }
-                else{
-                    System.out.println(url+" is a valid link");
-                }
+               // else{
+                   // System.out.println(url+" is a valid link");
+                //}
                     
             } catch (MalformedURLException e) {
                 // TODO Auto-generated catch block
