@@ -58,7 +58,7 @@ public class BridgePageTopNav extends BasePageObject{
 		actions.moveToElement(solutionsTab).build().perform();;
 	}
 	public  void clickOnCustomerStoriesLink() {
-		resourcesTab.click();	
+		customerStoriesTab.click();	
 	}
 	public void hoverOnResourcesTab1() {
 		Actions actions = new Actions(driver);
