@@ -108,6 +108,7 @@ public class TestBridgeTopNavLinks {
 		String popUpTitle = driver.findElement(By.xpath("//*[@id=\"page-title\"]/h2")).getText();
 		Assert.assertTrue(popUpTitle.contains("Explore the Bridge Suite"));
 		String popUpOptions = driver.findElement(By.xpath("//*[@id=\"tabs\"]")).getText();
+		System.out.println(popUpOptions);
 		Assert.assertTrue(popUpOptions.contains("LEARN"));
 		Assert.assertTrue(popUpOptions.contains("PERFORM"));
 		Assert.assertTrue(popUpOptions.contains("PRACTICE"));
@@ -120,19 +121,52 @@ public class TestBridgeTopNavLinks {
 		String productPageTitle = driver.findElement(By.xpath("//*[@id=\"block-mainpagecontent-2\"]/article/div/div/div/section[1]/h1")).getText();
 		Assert.assertEquals(productPageTitle, "The Bridge Suite");
 	}
-
+	//*[@id="solutions-page"]/div
 	@Test(priority = 3)
 	public void verifySolutionsUrl() {
 		bridgePageTopNav.clickOnSolutionsLink();
+	
+		//String popUpOptions = driver.findElement(By.cssSelector("div.content-item")).getText();
+		//System.out.println(popUpOptions);
+		//Assert.assertTrue(popUpOptions.contains("Bridge For"));
+		//Assert.assertTrue(popUpOptions.contains("Use Cases"));
 		String solutionsUrl = driver.getCurrentUrl();
 		System.out.println(solutionsUrl);
 		Assert.assertEquals(solutionsUrl, "https://www.getbridge.com/solutions");
 	}
-	// @Test(priority=4)
-	// public void verifyTimelineFooterUrl(){
-	// bridgePage.clickOnTimelineFooterLink();
-	// String timelineUrl=driver.getCurrentUrl();
-	// System.out.println(timelineUrl);
-	// Assert.assertEquals(timelineUrl,"https://www.getbridge.com/features/employee-timeline");
-	// }
+	@Test(priority = 4)
+	public void verifyCustomerStoriesUrl() {
+		bridgePageTopNav.clickOnCustomerStoriesLink();
+		String customerStoriesUrl = driver.getCurrentUrl();
+		System.out.println(customerStoriesUrl);
+		Assert.assertEquals(customerStoriesUrl, "https://www.getbridge.com/customer-stories");
+	}
+	@Test(priority = 5)
+	public void verifyResourcesUrl() {
+		bridgePageTopNav.clickOnResourcesLink();
+		String resourcesUrl = driver.getCurrentUrl();
+		System.out.println(resourcesUrl);
+		Assert.assertEquals(resourcesUrl, "https://www.getbridge.com/lc");
+	}
+	@Test(priority = 6)
+	public void verifyAboutUrl() {
+		bridgePageTopNav.clickOnAboutLink();
+		String aboutUrl = driver.getCurrentUrl();
+		System.out.println(aboutUrl);
+		Assert.assertEquals(aboutUrl, "https://www.getbridge.com/about");
+	}	
+	@Test(priority = 7)
+	public void verifyBlogUrl() {
+		bridgePageTopNav.clickOnBlogLink();
+		String blogUrl = driver.getCurrentUrl();
+		System.out.println(blogUrl);
+		Assert.assertEquals(blogUrl, "https://www.getbridge.com/blog");
+	}	
+	@Test(priority = 8)
+	public void verifyBookADemoUrl() {
+		bridgePageTopNav.clickOnBookADemoLink();
+		String bookADemoUrl = driver.getCurrentUrl();
+		System.out.println(bookADemoUrl);
+		Assert.assertEquals(bookADemoUrl, "https://www.getbridge.com/demo");
+	}
 }
