@@ -157,14 +157,14 @@ public class TestBridgeTopNavLinks {
 	}	
 	@Test(priority = 7)
 	public void verifyBlogUrl() {
-		bridgePageTopNav.clickOnAboutLink();
+		bridgePageTopNav.clickOnBlogLink();
 		String blogUrl = driver.getCurrentUrl();
 		System.out.println(blogUrl);
 		Assert.assertEquals(blogUrl, "https://www.getbridge.com/blog");
 	}	
 	@Test(priority = 8)
 	public void verifyBookADemoUrl() {
-		bridgePageTopNav.clickOnAboutLink();
+		bridgePageTopNav.clickOnBookADemoLink();
 		String bookADemoUrl = driver.getCurrentUrl();
 		System.out.println(bookADemoUrl);
 		Assert.assertEquals(bookADemoUrl, "https://www.getbridge.com/demo");
