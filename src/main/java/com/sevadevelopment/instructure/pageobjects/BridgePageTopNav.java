@@ -20,7 +20,7 @@ public class BridgePageTopNav extends BasePageObject{
 	@FindBy(id="resources-tab")
 	WebElement resourcesTab;
 	
-	@FindBy(xpath="//*[@id=\"nav-links\"]/a[5]")
+	@FindBy(id="about-tab")
 	WebElement aboutTab;
 
 	@FindBy(xpath="//*[@id=\"nav-links\"]/a[6]")

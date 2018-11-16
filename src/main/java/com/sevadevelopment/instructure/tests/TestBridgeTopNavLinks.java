@@ -191,7 +191,7 @@ public class TestBridgeTopNavLinks {
 		Assert.assertTrue(popUpOptions1.contains("WHO WE ARE"));
 		Assert.assertTrue(popUpOptions2.contains("WORK WITH US"));
 		Assert.assertTrue(popUpOptions3.contains("LEADERSHIP"));
-		Assert.assertTrue(popUpOptions4.contains("News & Press Releases"));
+		Assert.assertTrue(popUpOptions4.contains("NEWS & PRESS RELEASES"));
 		bridgePageTopNav.clickOnAboutLink();
 		String aboutUrl = driver.getCurrentUrl();
 		System.out.println(aboutUrl);
