@@ -2,11 +2,10 @@
 <suite name="Component Tests" verbose="2" annotations="JDK">
     <test name="Security Tests" preserve-order="true" >
         <classes>
-            <class name="com.sevadevelopment.instructure.tests.TestGmailLogin" />
-            <class name="com.sevadevelopment.instructure.tests.VideoPlayerDemo" />
-            <class name="com.sevadevelopment.instructure.tests.TestMailLogin" />
+            <class name="com.sevadevelopment.instructure.tests.TestBridgeFooterLinks" />
+            <class name="com.sevadevelopment.instructure.tests.TestBridgeTopNavLinks" />
             <class name="com.sevadevelopment.instructure.tests.TestRequestDemoForm" />
-            <class name="com.sevadevelopment.instructure.tests.TestSeekRegister" />
+            <class name="com.sevadevelopment.instructure.tests.VideoPlayerDemo" />
         </classes>
     </test>
 </suite>
