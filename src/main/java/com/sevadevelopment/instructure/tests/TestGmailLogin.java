@@ -7,7 +7,10 @@ import com.sevadevelopment.utility.SeleniumDriverFactory;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import org.testng.annotations.*;
+
+import java.net.MalformedURLException;
 
 public class TestGmailLogin{
 	WebDriver driver;
@@ -28,7 +31,7 @@ public class TestGmailLogin{
 	}
 
 	@BeforeMethod
-	public void setupTestMethod() {
+	public void setupTestMethod() throws MalformedURLException {
 		driver = new SeleniumDriverFactory().getDriver(configUtility.getConfig("browser"));
 		this.loginPage = new LoginPage(driver);
 
@@ -52,9 +55,16 @@ public class TestGmailLogin{
 	public void verifyThatInvalidPasswordDoesnotGetsAccess(String user, String pwd) throws Exception {
 		try {
 			this.loginPage.doLogin(user, pwd);
+            System.out.println("this test is executed");
 		} catch(Exception e) {
 			e.getMessage();
+            System.out.println("this method is executed" );
+
 		}
 		//Assert.assertEquals(dashboardPage.getTitle(), "This is Dashboard");
 	}
+	@Test
+    public void tests(){
+        System.out.println("this is blank test");
+    }
 }
