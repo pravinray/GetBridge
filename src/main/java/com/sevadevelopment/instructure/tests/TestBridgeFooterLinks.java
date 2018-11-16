@@ -19,7 +19,6 @@ public class TestBridgeFooterLinks {
 	WebDriver driver;
 	BridgePageFooter bridgePageFooter;
 	ConfigUtility configUtility;
-	String url = "";
 	String homePage = ("https://www.getbridge.com");
 
 	@BeforeClass
@@ -272,11 +271,8 @@ public class TestBridgeFooterLinks {
 		String contactLocationUrl = driver.findElement(By.xpath("//*[@id=\"footer-address\"]/a")).getAttribute("href");
 		Assert.assertEquals(contactLocationUrl, "https://goo.gl/maps/zrKJGEnDyhu");
 
-		String contactLocationText1 = driver.findElement(By.xpath("//*[@id=\"footer-address\"]/a/text()[1]")).getText();
-		Assert.assertEquals(contactLocationText1, "6630 South 3000 east, Suite 700");
-
-		String contactLocationText2 = driver.findElement(By.xpath("//*[@id=\"footer-address\"]/a/text()[2]")).getText();
-		Assert.assertEquals(contactLocationText2, "Salt Lake City, UT 84121");
+		String contactLocationText = driver.findElement(By.xpath("//*[@id=\"footer-address\"]/a")).getText();
+		Assert.assertEquals(contactLocationText, "6630 South 3000 east, Suite 700\n" + "Salt Lake City, UT 84121");
 	}
 
 	@Test(priority = 20)
@@ -287,12 +283,10 @@ public class TestBridgeFooterLinks {
 		String twitterUrl = driver.findElement(By.xpath("//*[@id=\"footer-social-icons\"]/a[2]")).getAttribute("href");
 		Assert.assertEquals(twitterUrl, "https://twitter.com/getbridge");
 
-		String youtubeUrl = driver.findElement(By.xpath("//*[@id=\"footer-social-icons\"]/a[3]"))
-				.getAttribute("href");
+		String youtubeUrl = driver.findElement(By.xpath("//*[@id=\"footer-social-icons\"]/a[3]")).getAttribute("href");
 		Assert.assertEquals(youtubeUrl, "https://www.youtube.com/user/bridgelms");
 
-		String linkedinUrl = driver.findElement(By.xpath("//*[@id=\"footer-social-icons\"]/a[4]"))
-				.getAttribute("href");
+		String linkedinUrl = driver.findElement(By.xpath("//*[@id=\"footer-social-icons\"]/a[4]")).getAttribute("href");
 		Assert.assertEquals(linkedinUrl, "https://www.linkedin.com/showcase/get-bridge/");
 	}
 
@@ -341,7 +335,7 @@ public class TestBridgeFooterLinks {
 
 		// verify bottom accessibility redirected page contents
 		String bottomAccessibilityRedirectedPage = driver
-				.findElement(By.xpath("//*[@id=\\\"jive-body-main\\\"]/div[2]")).getText();
+				.findElement(By.xpath("//*[@id=\"jive-body-main\"]/div[2]")).getText();
 		Assert.assertTrue(
 				bottomAccessibilityRedirectedPage.contains("Bridge Voluntary Product Accessibility Template"));
 		Assert.assertTrue(bottomAccessibilityRedirectedPage.contains("Web Content Accessibility Guidelines 2.0"));
