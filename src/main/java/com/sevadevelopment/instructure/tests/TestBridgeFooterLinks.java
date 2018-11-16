@@ -267,7 +267,7 @@ public class TestBridgeFooterLinks {
 		Assert.assertEquals(contactTelNo, "tel:+1877.576.5364");
 
 		String contactEmail = driver.findElement(By.xpath("//*[@id=\"footer-email\"]/a")).getAttribute("href");
-		Assert.assertEquals(contactEmail, "info@getbridge.com");
+		Assert.assertEquals(contactEmail, "mailto:info@getbridge.com");
 
 		String contactLocationUrl = driver.findElement(By.xpath("//*[@id=\"footer-address\"]/a")).getAttribute("href");
 		Assert.assertEquals(contactLocationUrl, "https://goo.gl/maps/zrKJGEnDyhu");
@@ -287,11 +287,11 @@ public class TestBridgeFooterLinks {
 		String twitterUrl = driver.findElement(By.xpath("//*[@id=\"footer-social-icons\"]/a[2]")).getAttribute("href");
 		Assert.assertEquals(twitterUrl, "https://twitter.com/getbridge");
 
-		String youtubeUrl = driver.findElement(By.xpath("//*[@id=\\\"footer-social-icons\\\"]/a[3]"))
+		String youtubeUrl = driver.findElement(By.xpath("//*[@id=\"footer-social-icons\"]/a[3]"))
 				.getAttribute("href");
 		Assert.assertEquals(youtubeUrl, "https://www.youtube.com/user/bridgelms");
 
-		String linkedinUrl = driver.findElement(By.xpath("//*[@id=\"footer-address\"]/a/text()[1]"))
+		String linkedinUrl = driver.findElement(By.xpath("//*[@id=\"footer-social-icons\"]/a[4]"))
 				.getAttribute("href");
 		Assert.assertEquals(linkedinUrl, "https://www.linkedin.com/showcase/get-bridge/");
 	}
