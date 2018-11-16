@@ -1,43 +1,48 @@
 package com.sevadevelopment.utility;
 
-import java.util.Collections;
-
-import org.apache.commons.lang3.SystemUtils;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class SeleniumDriverFactory  {
 
-    public WebDriver getDriver(String browser) {
+    public WebDriver getDriver(String browser) throws MalformedURLException {
         WebDriver driver;
-        ChromeOptions options = new ChromeOptions();
-		options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
-		options.addArguments("disable-infobars");
-		options.addArguments("-disable-extensions");
-        if(browser.equals("chrome")) {
-            if (SystemUtils.IS_OS_LINUX)
-                System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromeDriver/chromedriver_linux_64");
-            else if (SystemUtils.IS_OS_WINDOWS)
-                System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromeDriver/chromedriver_win32/chromedriver(2.42 v68-70).exe");
-            driver = new ChromeDriver(options);
+
+        if (browser.equalsIgnoreCase("chrome")) {
+            DesiredCapabilities cap = new DesiredCapabilities();
+            cap.setBrowserName(browser);
+            cap.setPlatform(Platform.LINUX);
+            System.out.println("flow came till here : : : : : : ");
+
+            ChromeOptions options = new ChromeOptions();
+            options.merge(cap);
+            options.addArguments("--start-maximized");
+            System.out.println("flow came till here 0000");
+
+
+            driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options);
+            System.out.println("Flow came till here ::1111");
+            return driver;
+        }else {
+            if (browser.equals("firefox")){
+                DesiredCapabilities cap = new DesiredCapabilities();
+                cap.setBrowserName(browser);
+                cap.setPlatform(Platform.LINUX);
+                System.out.println("flow came till here : : : : : : ");
+                System.out.println("flow came till here 0000");
+                driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), cap);
+                System.out.println("Flow came till here ::1111");
+                return driver;
+            }
         }
-        else if (browser.equals("firefox")) {
-            if (SystemUtils.IS_OS_LINUX)
-                System.setProperty("webdriver.gecko.driver", "src/main/resources/drivers/geckoDriver/geckodriver");
-            else if (SystemUtils.IS_OS_WINDOWS)
-                System.setProperty("webdriver.gecko.driver", "src/main/resources/drivers/geckoDriver/geckodriver.exe");
-            driver =  new FirefoxDriver(options);
-        }
-        else {
-            if (SystemUtils.IS_OS_LINUX)
-                System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromeDriver/chromedriver_linux_64");
-            else if (SystemUtils.IS_OS_WINDOWS)
-                System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromeDriver/chromedriver_win32/chromedriver(2.42 v68-70).exe");
-            driver = new ChromeDriver(options);
-        }
-        
-        return driver;
+
+      return null;
     }
+
 }
