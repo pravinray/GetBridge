@@ -1,19 +1,20 @@
 
 package com.sevadevelopment.instructure.tests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import java.io.File;
+import java.lang.reflect.Method;
 
+import org.openqa.selenium.*;
+import org.testng.Assert;
+import org.testng.ITestResult;
+import org.testng.annotations.*;
+
+import com.relevantcodes.extentreports.*;
 import com.sevadevelopment.instructure.pageobjects.BridgePageFooter;
 import com.sevadevelopment.utility.ConfigUtility;
 import com.sevadevelopment.utility.SeleniumDriverFactory;
+import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class TestBridgeFooterLinks {
 	WebDriver driver;
@@ -21,6 +22,8 @@ public class TestBridgeFooterLinks {
 	ConfigUtility configUtility;
 	String url = "";
 	String homePage = ("https://www.getbridge.com");
+	ExtentReports extent;
+	ExtentTest logger;
 
 	@BeforeClass
 	public void setupTestClass() {
@@ -28,8 +31,7 @@ public class TestBridgeFooterLinks {
 	}
 
 	@BeforeMethod
-	public void setupTestMethod() throws Exception {
-
+	public void setupTestMethod(Method method) throws Exception {
 		driver = new SeleniumDriverFactory().getDriver(configUtility.getConfig("browser"));
 		this.bridgePageFooter = new BridgePageFooter(driver);
 		driver.manage().window().setSize(new Dimension(860, 669));
@@ -37,10 +39,33 @@ public class TestBridgeFooterLinks {
 		driver.get(homePage);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0, 50000)", "");
+
+		extent = new ExtentReports("src/main/resources/extentReport.html", true);
+		extent.addSystemInfo("Host Name", "Bridge Testing").addSystemInfo("Environment", "Automation Testing")
+				.addSystemInfo("User Name", "Pravin Ray")
+				.addSystemInfo("OS Architecture", System.getProperty("os.arch"));
+		Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
+		String browserName = cap.getBrowserName();
+		String browserVersion = cap.getVersion().toString();
+		extent.addSystemInfo("Browser Name", browserName).addSystemInfo("Browser Version", browserVersion);
+		extent.loadConfig(new File("src/main/resources/extent-config.xml"));
+
+		// start logging for report generation
+		logger = extent.startTest(method.getName());
 	}
 
 	@AfterMethod
-	public void tearDownTestMethod() {
+	public void tearDownTestMethod(ITestResult result) {
+		if (result.getStatus() == ITestResult.FAILURE) {
+			logger.log(LogStatus.FAIL, "Test Case Failed is " + result.getName());
+			logger.log(LogStatus.FAIL, "Test Case Failed error is " + result.getThrowable());
+		} else if (result.getStatus() == ITestResult.SKIP) {
+			logger.log(LogStatus.SKIP, "Test Case Skipped is " + result.getName());
+		} else if (result.getStatus() == ITestResult.SUCCESS) {
+			logger.log(LogStatus.PASS, "Test Case Passed is " + result.getName());
+		}
+		extent.endTest(logger);
+		extent.flush();
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}
@@ -287,12 +312,10 @@ public class TestBridgeFooterLinks {
 		String twitterUrl = driver.findElement(By.xpath("//*[@id=\"footer-social-icons\"]/a[2]")).getAttribute("href");
 		Assert.assertEquals(twitterUrl, "https://twitter.com/getbridge");
 
-		String youtubeUrl = driver.findElement(By.xpath("//*[@id=\"footer-social-icons\"]/a[3]"))
-				.getAttribute("href");
+		String youtubeUrl = driver.findElement(By.xpath("//*[@id=\"footer-social-icons\"]/a[3]")).getAttribute("href");
 		Assert.assertEquals(youtubeUrl, "https://www.youtube.com/user/bridgelms");
 
-		String linkedinUrl = driver.findElement(By.xpath("//*[@id=\"footer-social-icons\"]/a[4]"))
-				.getAttribute("href");
+		String linkedinUrl = driver.findElement(By.xpath("//*[@id=\"footer-social-icons\"]/a[4]")).getAttribute("href");
 		Assert.assertEquals(linkedinUrl, "https://www.linkedin.com/showcase/get-bridge/");
 	}
 
