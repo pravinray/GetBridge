@@ -11,6 +11,8 @@ import com.sevadevelopment.utility.ConfigUtility;
 import com.sevadevelopment.utility.ExcelUtility;
 import com.sevadevelopment.utility.SeleniumDriverFactory;
 
+import java.net.MalformedURLException;
+
 public class TestRequestDemoForm {
 
 	ConfigUtility configUtility;
@@ -25,8 +27,9 @@ public class TestRequestDemoForm {
 	}
 
 	@BeforeMethod
-	public void setupTestMethod() {
-		driver = new SeleniumDriverFactory().getDriver(configUtility.getConfig("browser"));
+	@Parameters("browser")
+	public void setupTestMethod(String browser) throws Exception {
+		driver = new SeleniumDriverFactory().getDriver(browser);
 		this.requestDemoForm = new RequestDemoForm(driver);
 
 		driver.manage().window().maximize();

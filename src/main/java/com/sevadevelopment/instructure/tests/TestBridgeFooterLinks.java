@@ -6,10 +6,7 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import com.sevadevelopment.instructure.pageobjects.BridgePageFooter;
 import com.sevadevelopment.utility.ConfigUtility;
@@ -28,9 +25,10 @@ public class TestBridgeFooterLinks {
 	}
 
 	@BeforeMethod
-	public void setupTestMethod() throws Exception {
+	@Parameters("browser")
+	public void setupTestMethod(String browser) throws Exception {
 
-		driver = new SeleniumDriverFactory().getDriver(configUtility.getConfig("browser"));
+		driver = new SeleniumDriverFactory().getDriver(browser);
 		this.bridgePageFooter = new BridgePageFooter(driver);
 		driver.manage().window().setSize(new Dimension(860, 669));
 		// driver.manage().window().maximize();
