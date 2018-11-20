@@ -30,7 +30,8 @@ public class TestBridgeFooterLinks {
 	@BeforeMethod
 	public void setupTestMethod() throws Exception {
 
-		driver = new SeleniumDriverFactory().getDriver(configUtility.getConfig("browser"));
+		driver = new SeleniumDriverFactory().getDriver(configUtility.getConfig("browser"),
+				configUtility.getConfig("executionMethod"), configUtility.getConfig("seleniumHubUrl"));
 		this.bridgePageFooter = new BridgePageFooter(driver);
 		driver.manage().window().setSize(new Dimension(860, 669));
 		// driver.manage().window().maximize();
@@ -287,12 +288,10 @@ public class TestBridgeFooterLinks {
 		String twitterUrl = driver.findElement(By.xpath("//*[@id=\"footer-social-icons\"]/a[2]")).getAttribute("href");
 		Assert.assertEquals(twitterUrl, "https://twitter.com/getbridge");
 
-		String youtubeUrl = driver.findElement(By.xpath("//*[@id=\"footer-social-icons\"]/a[3]"))
-				.getAttribute("href");
+		String youtubeUrl = driver.findElement(By.xpath("//*[@id=\"footer-social-icons\"]/a[3]")).getAttribute("href");
 		Assert.assertEquals(youtubeUrl, "https://www.youtube.com/user/bridgelms");
 
-		String linkedinUrl = driver.findElement(By.xpath("//*[@id=\"footer-social-icons\"]/a[4]"))
-				.getAttribute("href");
+		String linkedinUrl = driver.findElement(By.xpath("//*[@id=\"footer-social-icons\"]/a[4]")).getAttribute("href");
 		Assert.assertEquals(linkedinUrl, "https://www.linkedin.com/showcase/get-bridge/");
 	}
 
