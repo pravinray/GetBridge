@@ -32,7 +32,9 @@ public class TestBridgeFooterLinks {
 
 	@BeforeMethod
 	public void setupTestMethod(Method method) throws Exception {
-		driver = new SeleniumDriverFactory().getDriver(configUtility.getConfig("browser"));
+		
+		driver = new SeleniumDriverFactory().getDriver(configUtility.getConfig("browser"),
+				configUtility.getConfig("executionMethod"), configUtility.getConfig("seleniumHubUrl"));
 		this.bridgePageFooter = new BridgePageFooter(driver);
 		driver.manage().window().setSize(new Dimension(860, 669));
 		// driver.manage().window().maximize();

@@ -37,8 +37,9 @@ public class TestBridgeTopNavLinks {
 	}
 
 	@BeforeMethod
-	public void setupTestMethod() {
-		driver = new SeleniumDriverFactory().getDriver(configUtility.getConfig("browser"));
+	public void setupTestMethod() throws Exception {
+		driver = new SeleniumDriverFactory().getDriver(configUtility.getConfig("browser"),
+				configUtility.getConfig("executionMethod"), configUtility.getConfig("seleniumHubUrl"));
 		this.bridgePageTopNav = new BridgePageTopNav(driver);
 
 		driver.manage().window().maximize();

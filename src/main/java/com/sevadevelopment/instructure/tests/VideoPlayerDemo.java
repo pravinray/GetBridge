@@ -29,7 +29,8 @@ public class VideoPlayerDemo {
 
 	@BeforeMethod
 	public void setupTestMethod() throws Exception {
-		driver = new SeleniumDriverFactory().getDriver(configUtility.getConfig("browser"));
+		driver = new SeleniumDriverFactory().getDriver(configUtility.getConfig("browser"),
+				configUtility.getConfig("executionMethod"), configUtility.getConfig("seleniumHubUrl"));
 		driver.manage().window().setSize(new Dimension(1024, 768));
 		driver.get("https://www.getbridge.com");
 		JavascriptExecutor js = (JavascriptExecutor) driver;
