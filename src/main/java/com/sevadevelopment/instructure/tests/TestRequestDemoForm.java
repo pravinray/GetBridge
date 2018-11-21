@@ -11,8 +11,6 @@ import com.sevadevelopment.utility.ConfigUtility;
 import com.sevadevelopment.utility.ExcelUtility;
 import com.sevadevelopment.utility.SeleniumDriverFactory;
 
-import java.net.MalformedURLException;
-
 public class TestRequestDemoForm {
 
 	ConfigUtility configUtility;
@@ -27,9 +25,9 @@ public class TestRequestDemoForm {
 	}
 
 	@BeforeMethod
-	@Parameters("browser")
-	public void setupTestMethod(String browser) throws Exception {
-		driver = new SeleniumDriverFactory().getDriver(browser);
+	public void setupTestMethod() throws Exception {
+		driver = new SeleniumDriverFactory().getDriver(configUtility.getConfig("browser"),
+				configUtility.getConfig("executionMethod"), configUtility.getConfig("seleniumHubUrl"));
 		this.requestDemoForm = new RequestDemoForm(driver);
 
 		driver.manage().window().maximize();
@@ -63,6 +61,6 @@ public class TestRequestDemoForm {
 		System.out.println("fname:: " + firstLastName + " email:: " + emailText + " mobile:: " + phoneNumber
 				+ " countryListIndex::" + countryListIndex + " organization:: " + organization + " job:: " + jobText
 				+ " estimatedUsersIndex::" + estimatedUsersIndex);
-		//assertTrue(currentURL.contains("/thank-you?ref=home-page"));
+		assertTrue(currentURL.contains("/thank-you?ref=home-page"));
 	}
 }

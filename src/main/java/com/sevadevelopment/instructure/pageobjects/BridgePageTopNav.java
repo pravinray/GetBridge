@@ -20,16 +20,14 @@ public class BridgePageTopNav extends BasePageObject{
 	@FindBy(id="resources-tab")
 	WebElement resourcesTab;
 	
-	@FindBy(xpath="//*[@id=\"nav-links\"]/a[5]")
+	@FindBy(id="about-tab")
 	WebElement aboutTab;
 
 	@FindBy(xpath="//*[@id=\"nav-links\"]/a[6]")
 	WebElement blogTab;
 	
-	@FindBy(id="ga-mobile-nav-demo")
+	@FindBy(id="ga-standard-nav-demo")
 	WebElement bookADemoTab;
-	//@FindBy(xpath="//*[@id=\"features\"]/div/a[2]")
-	//WebElement timelineFooterLink;
 	
 	public BridgePageTopNav(WebDriver driver) {
 	
@@ -57,12 +55,12 @@ public class BridgePageTopNav extends BasePageObject{
 	public  void clickOnCustomerStoriesLink() {
 		customerStoriesTab.click();	
 	}
-	public void hoverOnResourcesTab1() {
+	public void hoverOnCustomerStoriesTab() {
 		Actions actions = new Actions(driver);
-		actions.moveToElement(resourcesTab).build().perform();;
+		actions.moveToElement(customerStoriesTab).build().perform();;
 	}
 	public  void clickOnResourcesLink() {
-		customerStoriesTab.click();	
+		resourcesTab.click();	
 	}
 	public void hoverOnResourcesTab() {
 		Actions actions = new Actions(driver);
