@@ -4,17 +4,26 @@ package com.sevadevelopment.instructure.tests;
 import java.io.File;
 import java.lang.reflect.Method;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.ITestResult;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
-import com.relevantcodes.extentreports.*;
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 import com.sevadevelopment.instructure.pageobjects.BridgePageFooter;
 import com.sevadevelopment.utility.ConfigUtility;
+import com.sevadevelopment.utility.GenerateTestReport;
 import com.sevadevelopment.utility.SeleniumDriverFactory;
-import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class TestBridgeFooterLinks {
 	WebDriver driver;
@@ -24,10 +33,12 @@ public class TestBridgeFooterLinks {
 	String homePage = ("https://www.getbridge.com");
 	ExtentReports extent;
 	ExtentTest logger;
+	GenerateTestReport generateTestReport;
 
 	@BeforeClass
 	public void setupTestClass() {
 		configUtility = new ConfigUtility();
+		generateTestReport = new GenerateTestReport();
 	}
 
 	@BeforeMethod
@@ -41,6 +52,8 @@ public class TestBridgeFooterLinks {
 		driver.get(homePage);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0, 50000)", "");
+		
+//		generateTestReport.generateReport(method);
 
 		extent = new ExtentReports("src/main/resources/extentReport.html", true);
 		extent.addSystemInfo("Host Name", "Bridge Testing").addSystemInfo("Environment", "Automation Testing")
@@ -68,6 +81,9 @@ public class TestBridgeFooterLinks {
 		}
 		extent.endTest(logger);
 		extent.flush();
+		
+//		generateTestReport.flushReport(result);
+		
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}

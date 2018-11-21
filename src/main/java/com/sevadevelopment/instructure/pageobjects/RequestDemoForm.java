@@ -102,6 +102,6 @@ public class RequestDemoForm extends BasePageObject {
 		setOrganization(organization);
 		setJobTitle(jobText);
 		setEstimatedUsers(estimatedUsersIndex);
-//		submitBtn.click();
+		submitBtn.click();
 	}
 }
