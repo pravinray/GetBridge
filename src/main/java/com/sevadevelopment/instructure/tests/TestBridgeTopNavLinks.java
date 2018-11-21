@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -13,9 +14,11 @@ import org.testng.annotations.Test;
 
 import com.sevadevelopment.instructure.pageobjects.BridgePageTopNav;
 import com.sevadevelopment.utility.ConfigUtility;
+import com.sevadevelopment.utility.GenerateTestReport;
 import com.sevadevelopment.utility.SeleniumDriverFactory;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -30,24 +33,28 @@ public class TestBridgeTopNavLinks {
 	HttpURLConnection huc = null;
 	int respCode = 200;
 	String homePage = ("https://www.getbridge.com");
+	GenerateTestReport generateTestReport;
 
 	@BeforeClass
 	public void setupTestClass() {
 		configUtility = new ConfigUtility();
+		generateTestReport = new GenerateTestReport(driver);
 	}
 
 	@BeforeMethod
-	public void setupTestMethod() throws Exception {
+	public void setupTestMethod(Method method) throws Exception {
 		driver = new SeleniumDriverFactory().getDriver(configUtility.getConfig("browser"),
 				configUtility.getConfig("executionMethod"), configUtility.getConfig("seleniumHubUrl"));
 		this.bridgePageTopNav = new BridgePageTopNav(driver);
 
 		driver.manage().window().maximize();
 		driver.get(homePage);
+		generateTestReport.generateReport(method, driver);
 	}
 
 	@AfterMethod
-	public void tearDownTestMethod() {
+	public void tearDownTestMethod(ITestResult result) {
+		generateTestReport.flushReport(result);
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}

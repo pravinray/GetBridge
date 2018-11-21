@@ -1,11 +1,9 @@
 
 package com.sevadevelopment.instructure.tests;
 
-import java.io.File;
 import java.lang.reflect.Method;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -15,11 +13,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
-import com.relevantcodes.extentreports.LogStatus;
 import com.sevadevelopment.instructure.pageobjects.BridgePageFooter;
 import com.sevadevelopment.utility.ConfigUtility;
 import com.sevadevelopment.utility.GenerateTestReport;
@@ -31,19 +27,16 @@ public class TestBridgeFooterLinks {
 	ConfigUtility configUtility;
 	String url = "";
 	String homePage = ("https://www.getbridge.com");
-	ExtentReports extent;
-	ExtentTest logger;
 	GenerateTestReport generateTestReport;
 
 	@BeforeClass
 	public void setupTestClass() {
 		configUtility = new ConfigUtility();
-		generateTestReport = new GenerateTestReport();
+		generateTestReport = new GenerateTestReport(driver);
 	}
 
 	@BeforeMethod
 	public void setupTestMethod(Method method) throws Exception {
-		
 		driver = new SeleniumDriverFactory().getDriver(configUtility.getConfig("browser"),
 				configUtility.getConfig("executionMethod"), configUtility.getConfig("seleniumHubUrl"));
 		this.bridgePageFooter = new BridgePageFooter(driver);
@@ -52,38 +45,12 @@ public class TestBridgeFooterLinks {
 		driver.get(homePage);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0, 50000)", "");
-		
-//		generateTestReport.generateReport(method);
-
-		extent = new ExtentReports("src/main/resources/extentReport.html", true);
-		extent.addSystemInfo("Host Name", "Bridge Testing").addSystemInfo("Environment", "Automation Testing")
-				.addSystemInfo("User Name", "Pravin Ray")
-				.addSystemInfo("OS Architecture", System.getProperty("os.arch"));
-		Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
-		String browserName = cap.getBrowserName();
-		String browserVersion = cap.getVersion().toString();
-		extent.addSystemInfo("Browser Name", browserName).addSystemInfo("Browser Version", browserVersion);
-		extent.loadConfig(new File("src/main/resources/extent-config.xml"));
-
-		// start logging for report generation
-		logger = extent.startTest(method.getName());
+		generateTestReport.generateReport(method, driver);
 	}
 
 	@AfterMethod
 	public void tearDownTestMethod(ITestResult result) {
-		if (result.getStatus() == ITestResult.FAILURE) {
-			logger.log(LogStatus.FAIL, "Test Case Failed is " + result.getName());
-			logger.log(LogStatus.FAIL, "Test Case Failed error is " + result.getThrowable());
-		} else if (result.getStatus() == ITestResult.SKIP) {
-			logger.log(LogStatus.SKIP, "Test Case Skipped is " + result.getName());
-		} else if (result.getStatus() == ITestResult.SUCCESS) {
-			logger.log(LogStatus.PASS, "Test Case Passed is " + result.getName());
-		}
-		extent.endTest(logger);
-		extent.flush();
-		
-//		generateTestReport.flushReport(result);
-		
+		generateTestReport.flushReport(result);
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}

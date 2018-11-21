@@ -12,20 +12,20 @@ import org.testng.ITestResult;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
+import com.sevadevelopment.instructure.pageobjects.BasePageObject;
 
-public class GenerateTestReport {
+public class GenerateTestReport extends BasePageObject{
 
-	WebDriver driver;
 	ExtentReports extent;
 	ExtentTest logger;
 	
-	public GenerateTestReport() {
-		super();
+	public GenerateTestReport(WebDriver driver) {
+		super(driver);
 		PageFactory.initElements(driver, this);
 		
 	}
 	
-	public void generateReport(Method method) {
+	public void generateReport(Method method, WebDriver driver) {
 		extent = new ExtentReports("src/main/resources/extentReport.html", true);
 		extent.addSystemInfo("Host Name", "Bridge Testing").addSystemInfo("Environment", "Automation Testing")
 				.addSystemInfo("User Name", "Pravin Ray")
@@ -50,7 +50,7 @@ public class GenerateTestReport {
 		} else if (result.getStatus() == ITestResult.SUCCESS) {
 			logger.log(LogStatus.PASS, "Test Case Passed is " + result.getName());
 		}
-		extent.endTest(logger);
+//		extent.endTest(logger);
 		extent.flush();
 		
 	}
