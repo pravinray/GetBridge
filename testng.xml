@@ -1,10 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Component Tests" verbose="3" annotations="JDK" parallel="tests">
-    <listeners>
-        <listener class-name="com.sevadevelopment.utility.WebDriverListener"></listener>
-    </listeners>
     <!--CHROME TEST-->
-
     <test name="Chrome_Security_Test" parallel="methods">
         <parameter name="browser" value="chrome" />
         <parameter name="isGrid" value="false" />
@@ -42,11 +38,11 @@
 
                 <class name="com.sevadevelopment.instructure.tests.TestBridgeTopNavLinks">
                     <methods>
-                        <exclude name="checkAlllinks"/>
+                        <include name="checkAlllinks"/>
                         <exclude name="verifyProductTabInTopNav"/>
                         <exclude name="verifySolutionsUrl"/>
                         <exclude name="verifyCustomerStoriesUrl"/>
-                        <include name="verifyResourcesUrl"/>
+                        <exclude name="verifyResourcesUrl"/>
                         <exclude name="verifyAboutUrl"/>
                         <exclude name="verifyBlogUrl"/>
                         <exclude name="verifyBookADemoUrl"/>
@@ -99,11 +95,11 @@
                 </class>
                 <class name="com.sevadevelopment.instructure.tests.TestBridgeTopNavLinks" >
                     <methods>
-                        <exclude name="checkAlllinks"/>
+                        <include name="checkAlllinks"/>
                         <exclude name="verifyProductTabInTopNav"/>
                         <exclude name="verifySolutionsUrl"/>
                         <exclude name="verifyCustomerStoriesUrl"/>
-                        <include name="verifyResourcesUrl"/>
+                        <exclude name="verifyResourcesUrl"/>
                         <exclude name="verifyAboutUrl"/>
                         <exclude name="verifyBlogUrl"/>
                         <exclude name="verifyBookADemoUrl"/>

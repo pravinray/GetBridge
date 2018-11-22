@@ -43,8 +43,10 @@ public class TestBridgeTopNavLinks {
 		System.out.println("Before Method started ::"+Thread.currentThread().getId());
 		SeleniumDriverFactory.setDriver(browser, isGrid);
 
-		driverMap.put(Thread.currentThread().getId(),SeleniumDriverFactory.getDriver());
-		driver = driverMap.get(Long.valueOf(Thread.currentThread().getId()));
+		/*driverMap.put(Thread.currentThread().getId(),SeleniumDriverFactory.getDriver());
+		driver = driverMap.get(Long.valueOf(Thread.currentThread().getId()));*/
+
+		driver = SeleniumDriverFactory.getDriver();
 
 		driver.manage().window().maximize();
 		driver.get("https://www.getbridge.com");
