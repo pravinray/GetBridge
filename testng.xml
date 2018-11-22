@@ -1,11 +1,27 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Component Tests" verbose="2" annotations="JDK">
-    <test name="Security Tests" preserve-order="true" >
+<suite name="Component Tests" verbose="2" thread-count="2" annotations="JDK" parallel="tests">
+
+    <!--CHROME TEST-->
+
+    <test name="Chrome_Security_Test" >
+        <parameter name="browser" value="chrome">
+            <classes>
+                <class name="com.sevadevelopment.instructure.tests.TestBridgeFooterLinks" />
+                <class name="com.sevadevelopment.instructure.tests.TestBridgeTopNavLinks" />
+                <class name="com.sevadevelopment.instructure.tests.TestRequestDemoForm" />
+            </classes>
+        </parameter>
+    </test>
+
+    <!--FIREFOX_TEST-->
+
+    <test name="FireFox_Secutity_Test" >
+        <parameter name="browser" value="firefox">
         <classes>
             <class name="com.sevadevelopment.instructure.tests.TestBridgeFooterLinks" />
             <class name="com.sevadevelopment.instructure.tests.TestBridgeTopNavLinks" />
             <class name="com.sevadevelopment.instructure.tests.TestRequestDemoForm" />
-            <class name="com.sevadevelopment.instructure.tests.VideoPlayerDemo" />
         </classes>
+        </parameter>
     </test>
 </suite>
