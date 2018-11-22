@@ -145,6 +145,10 @@ public class TestBridgeTopNavLinks {
 		String solutionsUrl = driver.getCurrentUrl();
 		System.out.println(solutionsUrl);
 		Assert.assertEquals(solutionsUrl, "https://www.getbridge.com/solutions");
+		String solutionPageTitle = driver
+				.findElement(By.xpath("//*[@id=\"block-mainpagecontent-2\"]/article/div/div/div/section[1]/h1"))
+				.getText();
+		Assert.assertEquals(solutionPageTitle, "Bridge Software Solutions");
 	}
 
 	@Test(priority = 4)
@@ -166,6 +170,10 @@ public class TestBridgeTopNavLinks {
 		String customerStoriesUrl = driver.getCurrentUrl();
 		System.out.println(customerStoriesUrl);
 		Assert.assertEquals(customerStoriesUrl, "https://www.getbridge.com/customer-stories");
+		String customerStoriesPageTitle = driver
+				.findElement(By.xpath("//*[@id=\"block-mainpagecontent-2\"]/article/div/div/div[1]/section[1]/h1"))
+				.getText();
+		Assert.assertEquals(customerStoriesPageTitle, "Bridge Customer Success Stories");
 	}
 
 	@Test(priority = 5)
@@ -184,6 +192,10 @@ public class TestBridgeTopNavLinks {
 		String resourcesUrl = driver.getCurrentUrl();
 		System.out.println(resourcesUrl);
 		Assert.assertEquals(resourcesUrl, "https://www.getbridge.com/resources");
+		String resourcesPageTitle = driver
+				.findElement(By.xpath("//*[@id=\"block-mainpagecontent-2\"]/article/div/div/div/section[1]/h1"))
+				.getText();
+		Assert.assertEquals(resourcesPageTitle, "Bridge Resources");
 	}
 
 	@Test(priority = 6)
@@ -205,6 +217,10 @@ public class TestBridgeTopNavLinks {
 		String aboutUrl = driver.getCurrentUrl();
 		System.out.println(aboutUrl);
 		Assert.assertEquals(aboutUrl, "https://www.getbridge.com/about");
+		String aboutPageTitle = driver
+				.findElement(By.xpath("//*[@id=\"block-mainpagecontent-2\"]/article/div/div/div/section[1]/h1"))
+				.getText();
+		Assert.assertEquals(aboutPageTitle, "About Bridge");
 	}
 
 	@Test(priority = 7)
@@ -221,5 +237,8 @@ public class TestBridgeTopNavLinks {
 		String bookADemoUrl = driver.getCurrentUrl();
 		System.out.println(bookADemoUrl);
 		Assert.assertEquals(bookADemoUrl, "https://www.getbridge.com/demo");
+		String bookADemoPageTitle = driver
+				.findElement(By.xpath("/html/body/div[1]/div/main/section[1]/div/div[1]/h2[1]")).getText();
+		Assert.assertEquals(bookADemoPageTitle, "What’s your type?");
 	}
 }
