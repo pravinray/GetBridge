@@ -4,12 +4,9 @@ package com.sevadevelopment.instructure.tests;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import com.sevadevelopment.instructure.pageobjects.BridgePageTopNav;
 import com.sevadevelopment.utility.ConfigUtility;
@@ -21,6 +18,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class TestBridgeTopNavLinks {
 	WebDriver driver;
@@ -29,7 +28,9 @@ public class TestBridgeTopNavLinks {
 	String url = "";
 	HttpURLConnection huc = null;
 	int respCode = 200;
-	String homePage = ("https://www.getbridge.com");
+	String homePage = "https://www.getbridge.com";
+
+	public Map<Long, WebDriver> driverMap = new ConcurrentHashMap();
 
 	@BeforeClass
 	public void setupTestClass() {
@@ -37,40 +38,37 @@ public class TestBridgeTopNavLinks {
 	}
 
 	@BeforeMethod
-	public void setupTestMethod() throws Exception {
-		driver = new SeleniumDriverFactory().getDriver(configUtility.getConfig("browser"),
-				configUtility.getConfig("executionMethod"), configUtility.getConfig("seleniumHubUrl"));
-		this.bridgePageTopNav = new BridgePageTopNav(driver);
+	@Parameters({"browser","isGrid"})
+	public void setupTestMethod(String browser, boolean isGrid) throws Exception {
+		System.out.println("Before Method started ::"+Thread.currentThread().getId());
+		SeleniumDriverFactory.setDriver(browser, isGrid);
+
+		driverMap.put(Thread.currentThread().getId(),SeleniumDriverFactory.getDriver());
+		driver = driverMap.get(Long.valueOf(Thread.currentThread().getId()));
 
 		driver.manage().window().maximize();
-		driver.get(homePage);
+		driver.get("https://www.getbridge.com");
 	}
 
 	@AfterMethod
 	public void tearDownTestMethod() {
+		System.out.println("After Method started");
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}
 
-	@Test(priority = 1)
-	@DataProvider()
+	@Test
 	public void checkAlllinks() {
-
 		List<WebElement> links = driver.findElements(By.tagName("a"));
-
 		Iterator<WebElement> it = links.iterator();
 
 		while (it.hasNext()) {
-
 			url = it.next().getAttribute("href");
-
-			// System.out.println(url);
 
 			if (url == null || url.isEmpty()) {
 				System.out.println(url);
 				System.out.println("URL is either not configured for anchor tag or it is empty");
 				continue;
-
 			}
 
 			if (!url.startsWith(homePage)) {
@@ -81,27 +79,21 @@ public class TestBridgeTopNavLinks {
 
 			try {
 				huc = (HttpURLConnection) (new URL(url).openConnection());
-
 				huc.setRequestMethod("HEAD");
-
 				huc.connect();
-
 				respCode = huc.getResponseCode();
 
 				Assert.assertEquals(respCode, 200);
 
 			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-
 	}
 
-	@Test(priority = 2)
+	@Test
 	public void verifyProductTabInTopNav() {
 
 		// hover on tab and verify its contents
@@ -126,7 +118,7 @@ public class TestBridgeTopNavLinks {
 	}
 
 	// *[@id="solutions-page"]/div
-	@Test(priority = 3)
+	@Test
 	public void verifySolutionsUrl() {
 		bridgePageTopNav.hoverOnSolutionsTab();
 		String popUpOptions1 =driver.findElement(By.xpath("//*[@id=\"solutions-page\"]/div/div[1]/h3")).getText();
@@ -141,7 +133,7 @@ public class TestBridgeTopNavLinks {
 		Assert.assertEquals(solutionsUrl, "https://www.getbridge.com/solutions");
 	}
 
-	@Test(priority = 4)
+	@Test
 	public void verifyCustomerStoriesUrl() {
 		bridgePageTopNav.hoverOnCustomerStoriesTab();
 		String popUpOptions1 =driver.findElement(By.xpath("//*[@id=\"customer-stories-page\"]/div[1]/div[1]/p")).getText();
@@ -160,8 +152,9 @@ public class TestBridgeTopNavLinks {
 	}
 
 
-	@Test(priority = 5)
+	@Test
 	public void verifyResourcesUrl() {
+		System.out.println("This Test is being Executed 1");
 		bridgePageTopNav.hoverOnResourcesTab();
 		String popUpOptions1 =driver.findElement(By.xpath("//*[@id=\"resources-page\"]/div/div[1]/a[1]/h3")).getText();
 		System.out.println(popUpOptions1);
@@ -176,10 +169,12 @@ public class TestBridgeTopNavLinks {
 		String resourcesUrl = driver.getCurrentUrl();
 		System.out.println(resourcesUrl);
 		Assert.assertEquals(resourcesUrl, "https://www.getbridge.com/resources");
+		System.out.println("This Test is being completed 1");
 	}
 
-	@Test(priority = 6)
+	@Test
 	public void verifyAboutUrl() {
+		System.out.println("This Test is being Executed 2");
 		bridgePageTopNav.hoverOnAboutTab();
 		String popUpOptions1 =driver.findElement(By.xpath("//*[@id=\"about-page\"]/div/div[1]/div/a/h3")).getText();
 		System.out.println(popUpOptions1);
@@ -197,21 +192,26 @@ public class TestBridgeTopNavLinks {
 		String aboutUrl = driver.getCurrentUrl();
 		System.out.println(aboutUrl);
 		Assert.assertEquals(aboutUrl, "https://www.getbridge.com/about");
+		System.out.println("This Test is being Completed 2");
 	}
 
-	@Test(priority = 7)
+	@Test
 	public void verifyBlogUrl() {
+		System.out.println("This Test is being Executed 3");
 		bridgePageTopNav.clickOnBlogLink();
 		String blogUrl = driver.getCurrentUrl();
 		System.out.println(blogUrl);
 		Assert.assertEquals(blogUrl, "https://www.getbridge.com/blog");
+		System.out.println("This Test is being completed 3");
 	}
 
-	@Test(priority = 8)
+	@Test
 	public void verifyBookADemoUrl() {
+		System.out.println("This Test is being Executed 4");
 		bridgePageTopNav.clickOnBookADemoLink();
 		String bookADemoUrl = driver.getCurrentUrl();
 		System.out.println(bookADemoUrl);
 		Assert.assertEquals(bookADemoUrl, "https://www.getbridge.com/demo");
+		System.out.println("This Test is being completed 4");
 	}
 }
