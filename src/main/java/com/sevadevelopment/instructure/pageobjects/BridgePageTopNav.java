@@ -1,13 +1,11 @@
 package com.sevadevelopment.instructure.pageobjects;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class BridgePageTopNav extends BasePageObject{
@@ -32,64 +30,78 @@ public class BridgePageTopNav extends BasePageObject{
 	@FindBy(id="ga-standard-nav-demo")
 	WebElement bookADemoTab;
 	
+
 	public BridgePageTopNav(WebDriver driver) {
 			super(driver);
 			PageFactory.initElements(driver, this);
 	}
 	public  void clickOnProductTab() {
-		(new WebDriverWait(driver, 10))
-				.until(ExpectedConditions.elementToBeClickable(productTab)).click();
+		webDriverWait.until(ExpectedConditions.elementToBeClickable(productTab)).click();
 	}
 	public void hoverOnProductTab() {
-		(new Actions(driver)).moveToElement((new WebDriverWait(driver, 10))
-				.until(ExpectedConditions.visibilityOf(productTab))).build().perform();
+		(new Actions(driver)).moveToElement(
+				webDriverWait.until(
+						ExpectedConditions.visibilityOf(productTab)
+				)
+		).build().perform();
 	}
 	public  void clickOnSolutionsLink() {
-		(new WebDriverWait(driver, 10))
-				.until(ExpectedConditions.elementToBeClickable(solutionsTab)).click();
+		webDriverWait.until(ExpectedConditions.elementToBeClickable(solutionsTab)).click();
 	}
 	public void hoverOnSolutionsTab() {
-		(new Actions(driver)).moveToElement((new WebDriverWait(driver, 10))
-				.until(ExpectedConditions.visibilityOf(solutionsTab))).build().perform();
+		(new Actions(driver)).moveToElement(
+				webDriverWait.until(
+						ExpectedConditions.visibilityOf(solutionsTab)
+				)
+		).build().perform();
 	}
 	public  void clickOnCustomerStoriesLink() {
-		(new WebDriverWait(driver, 10))
-				.until(ExpectedConditions.elementToBeClickable(customerStoriesTab)).click();
+		webDriverWait.until(ExpectedConditions.elementToBeClickable(customerStoriesTab)).click();
 	}
 	public void hoverOnCustomerStoriesTab() {
-		(new Actions(driver)).moveToElement((new WebDriverWait(driver, 10))
-				.until(ExpectedConditions.visibilityOf(customerStoriesTab))).build().perform();
+		(new Actions(driver)).moveToElement(
+				webDriverWait.until(
+						ExpectedConditions.visibilityOf(customerStoriesTab)
+				)
+		).build().perform();
 	}
 	public  void clickOnResourcesLink() {
-		(new WebDriverWait(driver, 10))
-				.until(ExpectedConditions.elementToBeClickable(resourcesTab)).click();
+		webDriverWait.until(ExpectedConditions.elementToBeClickable(resourcesTab)).click();
 	}
 	public void hoverOnResourcesTab() {
-		(new Actions(driver)).moveToElement((new WebDriverWait(driver, 10))
-				.until(ExpectedConditions.visibilityOf(resourcesTab))).build().perform();
+		(new Actions(driver)).moveToElement(
+				webDriverWait.until(
+						ExpectedConditions.visibilityOf(resourcesTab)
+				)
+		).build().perform();
 	}
 	public  void clickOnAboutLink() {
-		(new WebDriverWait(driver, 10))
-				.until(ExpectedConditions.elementToBeClickable(aboutTab)).click();
+		webDriverWait.until(ExpectedConditions.elementToBeClickable(aboutTab)).click();
 	}
 	public void hoverOnAboutTab() {
-		(new Actions(driver)).moveToElement((new WebDriverWait(driver, 10))
-				.until(ExpectedConditions.visibilityOf(aboutTab))).build().perform();
+		(new Actions(driver)).moveToElement(
+				webDriverWait.until(
+						ExpectedConditions.visibilityOf(aboutTab)
+				)
+		).build().perform();
 	}
 	public  void clickOnBlogLink() {
-		(new WebDriverWait(driver, 10))
-				.until(ExpectedConditions.elementToBeClickable(blogTab)).click();
+		webDriverWait.until(ExpectedConditions.elementToBeClickable(blogTab)).click();
 	}
 	public void hoverOnBlogTab() {
-		(new Actions(driver)).moveToElement((new WebDriverWait(driver, 10))
-				.until(ExpectedConditions.visibilityOf(blogTab))).build().perform();
+		(new Actions(driver)).moveToElement(
+				webDriverWait.until(ExpectedConditions.visibilityOf(blogTab)
+				)
+		).build().perform();
 	}
 	public  void clickOnBookADemoLink() {
-		(new WebDriverWait(driver, 10))
-				.until(ExpectedConditions.elementToBeClickable(bookADemoTab)).click();
+		webDriverWait.until(ExpectedConditions.elementToBeClickable(bookADemoTab)).click();
 	}
 	public void hoverOnBookADemoTab() {
-		(new Actions(driver)).moveToElement((new WebDriverWait(driver, 10))
-				.until(ExpectedConditions.visibilityOf(bookADemoTab))).build().perform();
+		(new Actions(driver)).moveToElement(
+				webDriverWait.until(
+						ExpectedConditions.visibilityOf(bookADemoTab)
+				)
+		).build().perform();
 	}
 }

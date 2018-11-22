@@ -41,27 +41,26 @@ public class RequestDemoForm extends BasePageObject {
 	}
 
 	public void setFirstLastNameField(String firstLastNameText) {
-		WebElement element = (new WebDriverWait(driver, 10))
-				.until(ExpectedConditions.visibilityOf(this.firstLastNameField));
+		WebElement element = webDriverWait.until(ExpectedConditions.visibilityOf(this.firstLastNameField));
 		element.clear();
 		element.sendKeys(firstLastNameText);
 	}
 
 	public void setEmailField(String emailText) {
-		WebElement element = (new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOf(this.emailField));
+		WebElement element = webDriverWait.until(ExpectedConditions.visibilityOf(this.emailField));
 		element.clear();
 		element.sendKeys(emailText);
 	}
 
 	public void setPhoneNumberField(String phoneNumber) {
-		WebElement element = (new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOf(this.phoneField));
+		WebElement element = webDriverWait.until(ExpectedConditions.visibilityOf(this.phoneField));
 		element.clear();
 		element.sendKeys(phoneNumber);
 	}
 
 	public void setCountry(String countryListIndex) {
 		int i = Integer.parseInt(countryListIndex);
-		WebElement element = (new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOf(this.countryField));
+		WebElement element = webDriverWait.until(ExpectedConditions.visibilityOf(this.countryField));
 		Select countryDropDown = new Select(this.countryField);
 		List<WebElement> e = countryDropDown.getOptions();
 		System.out.println(e.get(i).getText());
@@ -69,23 +68,21 @@ public class RequestDemoForm extends BasePageObject {
 	}
 
 	public void setOrganization(String organization) {
-		WebElement element = (new WebDriverWait(driver, 10))
-				.until(ExpectedConditions.visibilityOf(this.organizationField));
+		WebElement element = webDriverWait.until(ExpectedConditions.visibilityOf(this.organizationField));
 		element.clear();
 		element.sendKeys(organization);
 	}
 
 	public void setJobTitle(String jobText) {
-		WebElement element = (new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOf(this.jobField));
+		WebElement element = webDriverWait.until(ExpectedConditions.visibilityOf(this.jobField));
 		element.clear();
 		element.sendKeys(jobText);
 	}
 
 	public void setEstimatedUsers(String estimatedUsersIndex) {
 		int i = Integer.parseInt(estimatedUsersIndex);
-		WebElement element = (new WebDriverWait(driver, 10))
-				.until(ExpectedConditions.visibilityOf(this.estimatedUsers));
-		Select usersDropDown = new Select(this.estimatedUsers);
+		WebElement element = webDriverWait.until(ExpectedConditions.visibilityOf(this.estimatedUsers));
+		Select usersDropDown = new Select(element);
 		List<WebElement> el = usersDropDown.getOptions();
 		System.out.println(el.get(i).getText());
 		usersDropDown.selectByIndex(i);
@@ -94,7 +91,6 @@ public class RequestDemoForm extends BasePageObject {
 
 	public void fillForm(String firstLastName, String emailText, String phoneNumber, String countryListIndex,
 			String organization, String jobText, String estimatedUsersIndex) {
-
 		setFirstLastNameField(firstLastName);
 		setEmailField(emailText);
 		setPhoneNumberField(phoneNumber);
