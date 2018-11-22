@@ -20,6 +20,7 @@ public class SeleniumDriverFactory {
 		options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
 		options.addArguments("disable-infobars");
 		options.addArguments("-disable-extensions");
+		//options.addArguments("--headless");
 		URL hubUrl;
 		DesiredCapabilities capability = new DesiredCapabilities();
 
