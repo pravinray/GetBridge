@@ -9,6 +9,7 @@
                 <class name="com.sevadevelopment.instructure.tests.TestBridgeFooterLinks" />
                 <class name="com.sevadevelopment.instructure.tests.TestBridgeTopNavLinks" />
                 <class name="com.sevadevelopment.instructure.tests.TestRequestDemoForm" />
+                <class name="com.sevadevelopment.instructure.tests.VideoPlayerDemo" />
             </classes>
         </parameter>
     </test>
@@ -21,6 +22,7 @@
             <class name="com.sevadevelopment.instructure.tests.TestBridgeFooterLinks" />
             <class name="com.sevadevelopment.instructure.tests.TestBridgeTopNavLinks" />
             <class name="com.sevadevelopment.instructure.tests.TestRequestDemoForm" />
+            <class name="com.sevadevelopment.instructure.tests.VideoPlayerDemo" />
         </classes>
         </parameter>
     </test>
