@@ -14,34 +14,22 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import com.sevadevelopment.instructure.pageobjects.BasePageObject;
 
-public class GenerateTestReport extends BasePageObject{
+public class GenerateTestReport extends BasePageObject {
 
 	ExtentReports extent;
 	ExtentTest logger;
-	
+
 	public GenerateTestReport(WebDriver driver) {
 		super(driver);
-		PageFactory.initElements(driver, this);
-		
-	}
-	
-	public void generateReport(Method method, WebDriver driver) {
 		extent = new ExtentReports("src/main/resources/extentReport.html", true);
-		extent.addSystemInfo("Host Name", "Bridge Testing").addSystemInfo("Environment", "Automation Testing")
-				.addSystemInfo("User Name", "Pravin Ray")
-				.addSystemInfo("OS Architecture", System.getProperty("os.arch"));
-		Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
-		String browserName = cap.getBrowserName();
-		String browserVersion = cap.getVersion().toString();
-		extent.addSystemInfo("Browser Name", browserName).addSystemInfo("Browser Version", browserVersion);
-		extent.loadConfig(new File("src/main/resources/extent-config.xml"));
+		PageFactory.initElements(driver, this);
+	}
 
-		// start logging for report generation
+	public void startReport(Method method) {
 		logger = extent.startTest(method.getName());
 	}
-	
-	public void flushReport(ITestResult result) {
-		
+
+	public void getReport(ITestResult result) {
 		if (result.getStatus() == ITestResult.FAILURE) {
 			logger.log(LogStatus.FAIL, "Test Case Failed is " + result.getName());
 			logger.log(LogStatus.FAIL, "Test Case Failed error is " + result.getThrowable());
@@ -50,8 +38,18 @@ public class GenerateTestReport extends BasePageObject{
 		} else if (result.getStatus() == ITestResult.SUCCESS) {
 			logger.log(LogStatus.PASS, "Test Case Passed is " + result.getName());
 		}
-//		extent.endTest(logger);
+		extent.endTest(logger);
+	}
+
+	public void flushReport(WebDriver driver) {
+		extent.addSystemInfo("Host Name", "Bridge Testing").addSystemInfo("Environment", "Automation Testing")
+				.addSystemInfo("User Name", "Pravin Ray")
+				.addSystemInfo("OS Architecture", System.getProperty("os.arch"));
+		Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
+		String browserName = cap.getBrowserName();
+		String browserVersion = cap.getVersion().toString();
+		extent.addSystemInfo("Browser Name", browserName).addSystemInfo("Browser Version", browserVersion);
+		extent.loadConfig(new File("src/main/resources/extent-config.xml"));
 		extent.flush();
-		
 	}
 }

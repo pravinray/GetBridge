@@ -4,6 +4,7 @@ import static org.testng.Assert.assertTrue;
 
 import java.lang.reflect.Method;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.ITestResult;
@@ -22,12 +23,17 @@ public class TestRequestDemoForm {
 	RequestDemoForm requestDemoForm;
 	String xlFilePath = "src/main/resources/testData/names.xlsx";
 	String sheetName = "Sheet2";
-	GenerateTestReport generateTestReport;
+	String homePage = ("https://www.getbridge.com");
+	GenerateTestReport generateTestReport = new GenerateTestReport(driver);
 
-	@BeforeClass
-	public void setupTestClass() {
+	@BeforeTest
+	public void doBeforeTest() {
 		configUtility = new ConfigUtility();
-		generateTestReport = new GenerateTestReport(driver);
+	}
+
+	@AfterSuite
+	public void doAfterSuite() {
+		generateTestReport.flushReport(driver);
 	}
 
 	@BeforeMethod
@@ -35,15 +41,16 @@ public class TestRequestDemoForm {
 		driver = new SeleniumDriverFactory().getDriver(configUtility.getConfig("browser"),
 				configUtility.getConfig("executionMethod"), configUtility.getConfig("seleniumHubUrl"));
 		this.requestDemoForm = new RequestDemoForm(driver);
-
 		driver.manage().window().maximize();
-		driver.get("https://www.getbridge.com");
-		generateTestReport.generateReport(method, driver);
+		driver.get(homePage);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0, 50000)", "");
+		generateTestReport.startReport(method);
 	}
 
 	@AfterMethod
 	public void tearDownTestMethod(ITestResult result) {
-		generateTestReport.flushReport(result);
+		generateTestReport.getReport(result);
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}
@@ -69,6 +76,6 @@ public class TestRequestDemoForm {
 		System.out.println("fname:: " + firstLastName + " email:: " + emailText + " mobile:: " + phoneNumber
 				+ " countryListIndex::" + countryListIndex + " organization:: " + organization + " job:: " + jobText
 				+ " estimatedUsersIndex::" + estimatedUsersIndex);
-//		assertTrue(currentURL.contains("/thank-you?ref=home-page"));
+		// assertTrue(currentURL.contains("/thank-you?ref=home-page"));
 	}
 }

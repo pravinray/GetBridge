@@ -1,16 +1,10 @@
 
 package com.sevadevelopment.instructure.tests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.testng.Assert;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import com.sevadevelopment.instructure.pageobjects.BridgePageTopNav;
 import com.sevadevelopment.utility.ConfigUtility;
@@ -33,12 +27,16 @@ public class TestBridgeTopNavLinks {
 	HttpURLConnection huc = null;
 	int respCode = 200;
 	String homePage = ("https://www.getbridge.com");
-	GenerateTestReport generateTestReport;
+	GenerateTestReport generateTestReport = new GenerateTestReport(driver);
 
-	@BeforeClass
-	public void setupTestClass() {
+	@BeforeTest
+	public void doBeforeTest() {
 		configUtility = new ConfigUtility();
-		generateTestReport = new GenerateTestReport(driver);
+	}
+
+	@AfterSuite
+	public void doAfterSuite() {
+		generateTestReport.flushReport(driver);
 	}
 
 	@BeforeMethod
@@ -46,15 +44,16 @@ public class TestBridgeTopNavLinks {
 		driver = new SeleniumDriverFactory().getDriver(configUtility.getConfig("browser"),
 				configUtility.getConfig("executionMethod"), configUtility.getConfig("seleniumHubUrl"));
 		this.bridgePageTopNav = new BridgePageTopNav(driver);
-
 		driver.manage().window().maximize();
 		driver.get(homePage);
-		generateTestReport.generateReport(method, driver);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0, 50000)", "");
+		generateTestReport.startReport(method);
 	}
 
 	@AfterMethod
 	public void tearDownTestMethod(ITestResult result) {
-		generateTestReport.flushReport(result);
+		generateTestReport.getReport(result);
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}
@@ -136,9 +135,9 @@ public class TestBridgeTopNavLinks {
 	@Test(priority = 3)
 	public void verifySolutionsUrl() {
 		bridgePageTopNav.hoverOnSolutionsTab();
-		String popUpOptions1 =driver.findElement(By.xpath("//*[@id=\"solutions-page\"]/div/div[1]/h3")).getText();
+		String popUpOptions1 = driver.findElement(By.xpath("//*[@id=\"solutions-page\"]/div/div[1]/h3")).getText();
 		System.out.println(popUpOptions1);
-		String popUpOptions2 =driver.findElement(By.xpath("//*[@id=\"solutions-page\"]/div/div[2]/h3")).getText();
+		String popUpOptions2 = driver.findElement(By.xpath("//*[@id=\"solutions-page\"]/div/div[2]/h3")).getText();
 		System.out.println(popUpOptions2);
 		Assert.assertTrue(popUpOptions1.contains("BRIDGE FOR"));
 		Assert.assertTrue(popUpOptions2.contains("USE CASES"));
@@ -151,11 +150,14 @@ public class TestBridgeTopNavLinks {
 	@Test(priority = 4)
 	public void verifyCustomerStoriesUrl() {
 		bridgePageTopNav.hoverOnCustomerStoriesTab();
-		String popUpOptions1 =driver.findElement(By.xpath("//*[@id=\"customer-stories-page\"]/div[1]/div[1]/p")).getText();
+		String popUpOptions1 = driver.findElement(By.xpath("//*[@id=\"customer-stories-page\"]/div[1]/div[1]/p"))
+				.getText();
 		System.out.println(popUpOptions1);
-		String popUpOptions2 =driver.findElement(By.xpath("//*[@id=\"customer-stories-page\"]/div[1]/div[2]/p")).getText();
+		String popUpOptions2 = driver.findElement(By.xpath("//*[@id=\"customer-stories-page\"]/div[1]/div[2]/p"))
+				.getText();
 		System.out.println(popUpOptions2);
-		String popUpOptions3 =driver.findElement(By.xpath("//*[@id=\"customer-stories-page\"]/div[1]/div[3]/p")).getText();
+		String popUpOptions3 = driver.findElement(By.xpath("//*[@id=\"customer-stories-page\"]/div[1]/div[3]/p"))
+				.getText();
 		System.out.println(popUpOptions3);
 		Assert.assertTrue(popUpOptions1.contains("Movement Mortgage surmounts"));
 		Assert.assertTrue(popUpOptions2.contains("With Bridge, SafetyNow"));
@@ -165,16 +167,15 @@ public class TestBridgeTopNavLinks {
 		System.out.println(customerStoriesUrl);
 		Assert.assertEquals(customerStoriesUrl, "https://www.getbridge.com/customer-stories");
 	}
-	
-	
+
 	@Test(priority = 5)
 	public void verifyResourcesUrl() {
 		bridgePageTopNav.hoverOnResourcesTab();
-		String popUpOptions1 =driver.findElement(By.xpath("//*[@id=\"resources-page\"]/div/div[1]/a[1]/h3")).getText();
+		String popUpOptions1 = driver.findElement(By.xpath("//*[@id=\"resources-page\"]/div/div[1]/a[1]/h3")).getText();
 		System.out.println(popUpOptions1);
-		String popUpOptions2 =driver.findElement(By.xpath("//*[@id=\"resources-page\"]/div/div[2]/a[1]/h3")).getText();
+		String popUpOptions2 = driver.findElement(By.xpath("//*[@id=\"resources-page\"]/div/div[2]/a[1]/h3")).getText();
 		System.out.println(popUpOptions2);
-		String popUpOptions3 =driver.findElement(By.xpath("//*[@id=\"resources-page\"]/div/div[3]/h3")).getText();
+		String popUpOptions3 = driver.findElement(By.xpath("//*[@id=\"resources-page\"]/div/div[3]/h3")).getText();
 		System.out.println(popUpOptions3);
 		Assert.assertTrue(popUpOptions1.contains("LEARNING CENTER"));
 		Assert.assertTrue(popUpOptions2.contains("EVENTS"));
@@ -188,13 +189,13 @@ public class TestBridgeTopNavLinks {
 	@Test(priority = 6)
 	public void verifyAboutUrl() {
 		bridgePageTopNav.hoverOnAboutTab();
-		String popUpOptions1 =driver.findElement(By.xpath("//*[@id=\"about-page\"]/div/div[1]/div/a/h3")).getText();
+		String popUpOptions1 = driver.findElement(By.xpath("//*[@id=\"about-page\"]/div/div[1]/div/a/h3")).getText();
 		System.out.println(popUpOptions1);
-		String popUpOptions2 =driver.findElement(By.xpath("//*[@id=\"about-page\"]/div/div[2]/div/a/h3")).getText();
+		String popUpOptions2 = driver.findElement(By.xpath("//*[@id=\"about-page\"]/div/div[2]/div/a/h3")).getText();
 		System.out.println(popUpOptions2);
-		String popUpOptions3 =driver.findElement(By.xpath("//*[@id=\"about-page\"]/div/div[3]/div/a/h3")).getText();
+		String popUpOptions3 = driver.findElement(By.xpath("//*[@id=\"about-page\"]/div/div[3]/div/a/h3")).getText();
 		System.out.println(popUpOptions3);
-		String popUpOptions4 =driver.findElement(By.xpath("//*[@id=\"about-page\"]/div/div[4]/div/a/h3")).getText();
+		String popUpOptions4 = driver.findElement(By.xpath("//*[@id=\"about-page\"]/div/div[4]/div/a/h3")).getText();
 		System.out.println(popUpOptions4);
 		Assert.assertTrue(popUpOptions1.contains("WHO WE ARE"));
 		Assert.assertTrue(popUpOptions2.contains("WORK WITH US"));
