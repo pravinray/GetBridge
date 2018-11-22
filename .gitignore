@@ -5,4 +5,4 @@ target
 .project
 bin
 test-output
-src/main/resources/extentReport.html
+src/main/resources/*.html
