@@ -1,29 +1,121 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Component Tests" verbose="2" thread-count="2" annotations="JDK" parallel="tests">
+<suite name="Component Tests" verbose="3" annotations="JDK"
+	parallel="tests">
+	<!--CHROME TEST -->
+	<test name="Chrome_Security_Test" parallel="methods">
+		<parameter name="browser" value="chrome" />
+		<parameter name="isGrid" value="false" />
+		<classes>
+			<class name="com.sevadevelopment.instructure.tests.TestBridgeFooterLinks">
+				<methods>
+					<exclude name="verifyAccessibilityUrl" />
+					<exclude name="verifyPrivacyPolicyUrl" />
+					<exclude name="verifyTermsOfUseUrl" />
+					<exclude name="verifyContactSalesUrl" />
+					<exclude name="verifyManagementUrl" />
+					<exclude name="verifyTimelineModuleUrl" />
+					<exclude name="verifySkillsAsseessmentUrl" />
+					<exclude name="verifyGoalsAndTasksUrl" />
+					<exclude name="verifyRobustReportingUrl" />
+					<exclude name="verifyRetainUrl" />
+					<exclude name="verifyContentServicesUrl" />
+					<exclude name="verifyOffTheShelfCoursesUrl" />
+					<exclude name="verifyArcVideoUrl" />
+					<exclude name="verifyLearnFromYourLearningUrl" />
+					<exclude name="verifyManagerDashboardUrl" />
+					<exclude name="verifyAdminUrl" />
+					<exclude name="verifyEasyToUseUrl" />
+					<exclude name="verifyAnytimeAnywhereUrl" />
+					<exclude name="verifyContactTelephoneEmailAndLocation" />
+					<exclude name="verifySocialNetworkPagesUrl" />
+					<exclude name="verifyBottomSupportTermsUrl" />
+					<exclude name="verifyBottomPrivacyPolicyUrl" />
+					<exclude name="verifyBottomTermsOfUseUrl" />
+					<exclude name="verifyBottomAccessibilityUrl" />
+					<exclude name="verifyBottomGDPRUrl" />
+					<exclude name="verifyBottomNewsUrl" />
+				</methods>
+			</class>
 
-    <!--CHROME TEST-->
+			<class name="com.sevadevelopment.instructure.tests.TestBridgeTopNavLinks">
+				<methods>
+					<include name="checkAlllinks" />
+					<exclude name="verifyProductTabInTopNav" />
+					<exclude name="verifySolutionsUrl" />
+					<exclude name="verifyCustomerStoriesUrl" />
+					<exclude name="verifyResourcesUrl" />
+					<exclude name="verifyAboutUrl" />
+					<exclude name="verifyBlogUrl" />
+					<exclude name="verifyBookADemoUrl" />
+				</methods>
+			</class>
 
-    <test name="Chrome_Security_Test" >
-        <parameter name="browser" value="chrome">
-            <classes>
-                <class name="com.sevadevelopment.instructure.tests.TestBridgeFooterLinks" />
-                <class name="com.sevadevelopment.instructure.tests.TestBridgeTopNavLinks" />
-                <class name="com.sevadevelopment.instructure.tests.TestRequestDemoForm" />
-                <class name="com.sevadevelopment.instructure.tests.VideoPlayerDemo" />
-            </classes>
-        </parameter>
-    </test>
+			<class
+				name="com.sevadevelopment.instructure.tests.TestRequestDemoForm">
+				<methods>
+					<exclude name="fillRequestDemoFormAndVerifyThankingPage" />
+				</methods>
+			</class>
+		</classes>
+	</test>
 
-    <!--FIREFOX_TEST-->
+	<!--FIREFOX_TEST -->
 
-    <test name="FireFox_Secutity_Test" >
-        <parameter name="browser" value="firefox">
-        <classes>
-            <class name="com.sevadevelopment.instructure.tests.TestBridgeFooterLinks" />
-            <class name="com.sevadevelopment.instructure.tests.TestBridgeTopNavLinks" />
-            <class name="com.sevadevelopment.instructure.tests.TestRequestDemoForm" />
-            <class name="com.sevadevelopment.instructure.tests.VideoPlayerDemo" />
-        </classes>
-        </parameter>
-    </test>
+
+	<test name="FireFox_Secutity_Test" parallel="methods">
+		<parameter name="browser" value="firefox" />
+		<parameter name="isGrid" value="false" />
+		<classes>
+			<class
+				name="com.sevadevelopment.instructure.tests.TestBridgeFooterLinks">
+				<methods>
+					<exclude name="verifyAccessibilityUrl" />
+					<exclude name="verifyPrivacyPolicyUrl" />
+					<exclude name="verifyTermsOfUseUrl" />
+					<exclude name="verifyContactSalesUrl" />
+					<exclude name="verifyManagementUrl" />
+					<exclude name="verifyTimelineModuleUrl" />
+					<exclude name="verifySkillsAsseessmentUrl" />
+					<exclude name="verifyGoalsAndTasksUrl" />
+					<exclude name="verifyRobustReportingUrl" />
+					<exclude name="verifyRetainUrl" />
+					<exclude name="verifyContentServicesUrl" />
+					<exclude name="verifyOffTheShelfCoursesUrl" />
+					<exclude name="verifyArcVideoUrl" />
+					<exclude name="verifyLearnFromYourLearningUrl" />
+					<exclude name="verifyManagerDashboardUrl" />
+					<exclude name="verifyAdminUrl" />
+					<exclude name="verifyEasyToUseUrl" />
+					<exclude name="verifyAnytimeAnywhereUrl" />
+					<exclude name="verifyContactTelephoneEmailAndLocation" />
+					<exclude name="verifySocialNetworkPagesUrl" />
+					<exclude name="verifyBottomSupportTermsUrl" />
+					<exclude name="verifyBottomPrivacyPolicyUrl" />
+					<exclude name="verifyBottomTermsOfUseUrl" />
+					<exclude name="verifyBottomAccessibilityUrl" />
+					<exclude name="verifyBottomGDPRUrl" />
+					<exclude name="verifyBottomNewsUrl" />
+				</methods>
+			</class>
+			<class
+				name="com.sevadevelopment.instructure.tests.TestBridgeTopNavLinks">
+				<methods>
+					<include name="checkAlllinks" />
+					<exclude name="verifyProductTabInTopNav" />
+					<exclude name="verifySolutionsUrl" />
+					<exclude name="verifyCustomerStoriesUrl" />
+					<exclude name="verifyResourcesUrl" />
+					<exclude name="verifyAboutUrl" />
+					<exclude name="verifyBlogUrl" />
+					<exclude name="verifyBookADemoUrl" />
+				</methods>
+			</class>
+			<class
+				name="com.sevadevelopment.instructure.tests.TestRequestDemoForm">
+				<methods>
+					<exclude name="fillRequestDemoFormAndVerifyThankingPage" />
+				</methods>
+			</class>
+		</classes>
+	</test>
 </suite>

@@ -3,10 +3,12 @@ package com.sevadevelopment.instructure.tests;
 import static org.testng.Assert.assertTrue;
 
 import java.lang.reflect.Method;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
@@ -26,8 +28,12 @@ public class TestRequestDemoForm {
 	String homePage = ("https://www.getbridge.com");
 	GenerateTestReport generateTestReport = new GenerateTestReport(driver);
 
-	@BeforeTest
-	public void doBeforeTest() {
+	public Map<Long, WebDriver> driverMap = new ConcurrentHashMap();
+	public WebDriverWait wait;
+	public SeleniumDriverFactory tlDriverFactory = new SeleniumDriverFactory();
+
+	@BeforeClass
+	public void setupTestClass() {
 		configUtility = new ConfigUtility();
 	}
 
@@ -37,14 +43,20 @@ public class TestRequestDemoForm {
 	}
 
 	@BeforeMethod
-	public void setupTestMethod(Method method) throws Exception {
-		driver = new SeleniumDriverFactory().getDriver(configUtility.getConfig("browser"),
-				configUtility.getConfig("executionMethod"), configUtility.getConfig("seleniumHubUrl"));
-		this.requestDemoForm = new RequestDemoForm(driver);
+	@Parameters({"browser","isGrid"})
+	public void setupTestMethod(String browser, boolean isGrid, Method method) throws Exception {
+		System.out.println("Before Method started ::"+Thread.currentThread().getId());
+		SeleniumDriverFactory.setDriver(browser,isGrid);
+
+		driverMap.put(Thread.currentThread().getId(),SeleniumDriverFactory.getDriver());
+		driver = driverMap.get(Long.valueOf(Thread.currentThread().getId()));
+
 		driver.manage().window().maximize();
 		driver.get(homePage);
+		
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0, 50000)", "");
+		
 		generateTestReport.startReport(method);
 	}
 
@@ -76,6 +88,6 @@ public class TestRequestDemoForm {
 		System.out.println("fname:: " + firstLastName + " email:: " + emailText + " mobile:: " + phoneNumber
 				+ " countryListIndex::" + countryListIndex + " organization:: " + organization + " job:: " + jobText
 				+ " estimatedUsersIndex::" + estimatedUsersIndex);
-		// assertTrue(currentURL.contains("/thank-you?ref=home-page"));
+		 assertTrue(currentURL.contains("/thank-you?ref=home-page"));
 	}
 }

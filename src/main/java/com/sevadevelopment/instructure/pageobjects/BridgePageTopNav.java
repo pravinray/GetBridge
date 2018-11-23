@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
 public class BridgePageTopNav extends BasePageObject{
@@ -29,62 +30,78 @@ public class BridgePageTopNav extends BasePageObject{
 	@FindBy(id="ga-standard-nav-demo")
 	WebElement bookADemoTab;
 	
+
 	public BridgePageTopNav(WebDriver driver) {
-	
 			super(driver);
 			PageFactory.initElements(driver, this);
-		
-	
 	}
 	public  void clickOnProductTab() {
-		productTab.click();	
+		webDriverWait.until(ExpectedConditions.elementToBeClickable(productTab)).click();
 	}
-	
 	public void hoverOnProductTab() {
-		Actions actions = new Actions(driver);
-		actions.moveToElement(productTab).build().perform();;
+		(new Actions(driver)).moveToElement(
+				webDriverWait.until(
+						ExpectedConditions.visibilityOf(productTab)
+				)
+		).build().perform();
 	}
-	
 	public  void clickOnSolutionsLink() {
-		solutionsTab.click();	
+		webDriverWait.until(ExpectedConditions.elementToBeClickable(solutionsTab)).click();
 	}
 	public void hoverOnSolutionsTab() {
-		Actions actions = new Actions(driver);
-		actions.moveToElement(solutionsTab).build().perform();;
+		(new Actions(driver)).moveToElement(
+				webDriverWait.until(
+						ExpectedConditions.visibilityOf(solutionsTab)
+				)
+		).build().perform();
 	}
 	public  void clickOnCustomerStoriesLink() {
-		customerStoriesTab.click();	
+		webDriverWait.until(ExpectedConditions.elementToBeClickable(customerStoriesTab)).click();
 	}
 	public void hoverOnCustomerStoriesTab() {
-		Actions actions = new Actions(driver);
-		actions.moveToElement(customerStoriesTab).build().perform();;
+		(new Actions(driver)).moveToElement(
+				webDriverWait.until(
+						ExpectedConditions.visibilityOf(customerStoriesTab)
+				)
+		).build().perform();
 	}
 	public  void clickOnResourcesLink() {
-		resourcesTab.click();	
+		webDriverWait.until(ExpectedConditions.elementToBeClickable(resourcesTab)).click();
 	}
 	public void hoverOnResourcesTab() {
-		Actions actions = new Actions(driver);
-		actions.moveToElement(resourcesTab).build().perform();;
+		(new Actions(driver)).moveToElement(
+				webDriverWait.until(
+						ExpectedConditions.visibilityOf(resourcesTab)
+				)
+		).build().perform();
 	}
 	public  void clickOnAboutLink() {
-		aboutTab.click();	
+		webDriverWait.until(ExpectedConditions.elementToBeClickable(aboutTab)).click();
 	}
 	public void hoverOnAboutTab() {
-		Actions actions = new Actions(driver);
-		actions.moveToElement(aboutTab).build().perform();;
+		(new Actions(driver)).moveToElement(
+				webDriverWait.until(
+						ExpectedConditions.visibilityOf(aboutTab)
+				)
+		).build().perform();
 	}
 	public  void clickOnBlogLink() {
-		blogTab.click();	
+		webDriverWait.until(ExpectedConditions.elementToBeClickable(blogTab)).click();
 	}
 	public void hoverOnBlogTab() {
-		Actions actions = new Actions(driver);
-		actions.moveToElement(blogTab).build().perform();;
+		(new Actions(driver)).moveToElement(
+				webDriverWait.until(ExpectedConditions.visibilityOf(blogTab)
+				)
+		).build().perform();
 	}
 	public  void clickOnBookADemoLink() {
-		bookADemoTab.click();	
+		webDriverWait.until(ExpectedConditions.elementToBeClickable(bookADemoTab)).click();
 	}
 	public void hoverOnBookADemoTab() {
-		Actions actions = new Actions(driver);
-		actions.moveToElement(bookADemoTab).build().perform();;
+		(new Actions(driver)).moveToElement(
+				webDriverWait.until(
+						ExpectedConditions.visibilityOf(bookADemoTab)
+				)
+		).build().perform();
 	}
 }

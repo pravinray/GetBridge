@@ -84,140 +84,94 @@ public class BridgePageFooter extends BasePageObject {
 	}
 
 	public void clickOnAccessibilityLink() {
-		WebDriverWait wait = new WebDriverWait(driver, 2);
-		wait.until(ExpectedConditions.visibilityOf(accessibility));
-		accessibility.click();
+		webDriverWait.until(ExpectedConditions.visibilityOf(accessibility)).click();
 	}
 
 	public void clickOnPrivacyPolicyLink() {
-		WebDriverWait wait = new WebDriverWait(driver, 2);
-		wait.until(ExpectedConditions.visibilityOf(privacyPolicy));
-		privacyPolicy.click();
+		webDriverWait.until(ExpectedConditions.visibilityOf(privacyPolicy)).click();
 	}
 
 	public void clickOnTermsOfUse() {
-		WebDriverWait wait = new WebDriverWait(driver, 2);
-		wait.until(ExpectedConditions.visibilityOf(termsOfUse));
-		termsOfUse.click();
+		webDriverWait.until(ExpectedConditions.visibilityOf(termsOfUse)).click();
 	}
 
 	public void clickOnManagement() {
-		WebDriverWait wait = new WebDriverWait(driver, 2);
-		wait.until(ExpectedConditions.visibilityOf(management));
-		management.click();
+		webDriverWait.until(ExpectedConditions.visibilityOf(management)).click();
 	}
 
 	public void clickOnTimelineModule() {
-		WebDriverWait wait = new WebDriverWait(driver, 2);
-		wait.until(ExpectedConditions.visibilityOf(timelineModule));
-		timelineModule.click();
+		webDriverWait.until(ExpectedConditions.visibilityOf(timelineModule)).click();
 	}
 
 	public void clickOnSkillsAssessment() {
-		WebDriverWait wait = new WebDriverWait(driver, 2);
-		wait.until(ExpectedConditions.visibilityOf(skillsAssessment));
-		skillsAssessment.click();
+		webDriverWait.until(ExpectedConditions.visibilityOf(skillsAssessment)).click();
 	}
 
 	public void clickOnGoalsAndTasks() {
-		WebDriverWait wait = new WebDriverWait(driver, 2);
-		wait.until(ExpectedConditions.visibilityOf(goalsAndTasks));
-		goalsAndTasks.click();
+		webDriverWait.until(ExpectedConditions.visibilityOf(goalsAndTasks)).click();
 	}
 
 	public void clickOnRobustReporting() {
-		WebDriverWait wait = new WebDriverWait(driver, 2);
-		wait.until(ExpectedConditions.visibilityOf(robustReporting));
-		robustReporting.click();
+		webDriverWait.until(ExpectedConditions.visibilityOf(robustReporting)).click();
 	}
 
 	public void clickOnRetain() {
-		WebDriverWait wait = new WebDriverWait(driver, 2);
-		wait.until(ExpectedConditions.visibilityOf(retain));
-		retain.click();
+		webDriverWait.until(ExpectedConditions.visibilityOf(retain)).click();
 	}
 
 	public void clickOnContentServices() {
-		WebDriverWait wait = new WebDriverWait(driver, 2);
-		wait.until(ExpectedConditions.visibilityOf(contentServices));
-		contentServices.click();
+		webDriverWait.until(ExpectedConditions.visibilityOf(contentServices)).click();
 	}
 
 	public void clickOnOffTheShelfCourses() {
-		WebDriverWait wait = new WebDriverWait(driver, 2);
-		wait.until(ExpectedConditions.visibilityOf(offTheShelfCourses));
-		offTheShelfCourses.click();
+		webDriverWait.until(ExpectedConditions.visibilityOf(offTheShelfCourses)).click();
 	}
 
 	public void clickOnArcVideo() {
-		WebDriverWait wait = new WebDriverWait(driver, 2);
-		wait.until(ExpectedConditions.visibilityOf(arcVideo));
-		arcVideo.click();
+		webDriverWait.until(ExpectedConditions.visibilityOf(arcVideo)).click();
 	}
 
 	public void clickOnLearnFromYourLearning() {
-		WebDriverWait wait = new WebDriverWait(driver, 2);
-		wait.until(ExpectedConditions.visibilityOf(learnFromYourLearning));
-		learnFromYourLearning.click();
+		webDriverWait.until(ExpectedConditions.visibilityOf(learnFromYourLearning)).click();
 	}
 
 	public void clickOnManagerDashboard() {
-		WebDriverWait wait = new WebDriverWait(driver, 2);
-		wait.until(ExpectedConditions.visibilityOf(managerDashboard));
-		managerDashboard.click();
+		webDriverWait.until(ExpectedConditions.visibilityOf(managerDashboard)).click();
 	}
 
 	public void clickOnAdmin() {
-		WebDriverWait wait = new WebDriverWait(driver, 2);
-		wait.until(ExpectedConditions.visibilityOf(admin));
-		admin.click();
+		webDriverWait.until(ExpectedConditions.visibilityOf(admin)).click();
 	}
 
 	public void clickOnEasyToUse() {
-		WebDriverWait wait = new WebDriverWait(driver, 2);
-		wait.until(ExpectedConditions.visibilityOf(easyToUse));
-		easyToUse.click();
+		webDriverWait.until(ExpectedConditions.visibilityOf(easyToUse)).click();
 	}
 
 	public void clickOnAnytimeAnywhere() {
-		WebDriverWait wait = new WebDriverWait(driver, 2);
-		wait.until(ExpectedConditions.visibilityOf(anytimeAnywhere));
-		anytimeAnywhere.click();
+		webDriverWait.until(ExpectedConditions.visibilityOf(anytimeAnywhere)).click();
 	}
 
 	public void clickOnSupportTerms() {
-		WebDriverWait wait = new WebDriverWait(driver, 2);
-		wait.until(ExpectedConditions.visibilityOf(supportTerms));
-		supportTerms.click();
+		webDriverWait.until(ExpectedConditions.visibilityOf(supportTerms)).click();
 	}
 
 	public void clickOnBottomPrivacyPolicy() {
-		WebDriverWait wait = new WebDriverWait(driver, 2);
-		wait.until(ExpectedConditions.visibilityOf(bottomPrivacyPolicy));
-		bottomPrivacyPolicy.click();
+		webDriverWait.until(ExpectedConditions.visibilityOf(bottomPrivacyPolicy)).click();
 	}
 
 	public void clickOnBottomTermsOfUse() {
-		WebDriverWait wait = new WebDriverWait(driver, 2);
-		wait.until(ExpectedConditions.visibilityOf(bottomTermsOfUse));
-		bottomTermsOfUse.click();
+		webDriverWait.until(ExpectedConditions.visibilityOf(bottomTermsOfUse)).click();
 	}
 
 	public void clickOnBottomAccessibility() {
-		WebDriverWait wait = new WebDriverWait(driver, 2);
-		wait.until(ExpectedConditions.visibilityOf(bottomAccessibility));
-		bottomAccessibility.click();
+		webDriverWait.until(ExpectedConditions.visibilityOf(bottomAccessibility)).click();
 	}
 
 	public void clickOnBottomGDPR() {
-		WebDriverWait wait = new WebDriverWait(driver, 2);
-		wait.until(ExpectedConditions.visibilityOf(bottomGDPR));
-		bottomGDPR.click();
+		webDriverWait.until(ExpectedConditions.visibilityOf(bottomGDPR)).click();
 	}
 
 	public void clickOnBottomNews() {
-		WebDriverWait wait = new WebDriverWait(driver, 2);
-		wait.until(ExpectedConditions.visibilityOf(bottomNews));
-		bottomNews.click();
+		webDriverWait.until(ExpectedConditions.visibilityOf(bottomNews)).click();
 	}
 }
