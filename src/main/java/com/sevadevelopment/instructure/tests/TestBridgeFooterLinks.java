@@ -1,23 +1,23 @@
 
 package com.sevadevelopment.instructure.tests;
 
-import java.io.File;
 import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
-import com.relevantcodes.extentreports.*;
 import com.sevadevelopment.instructure.pageobjects.BridgePageFooter;
 import com.sevadevelopment.utility.ConfigUtility;
+import com.sevadevelopment.utility.GenerateTestReport;
 import com.sevadevelopment.utility.SeleniumDriverFactory;
-import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class TestBridgeFooterLinks {
 	WebDriver driver;
@@ -25,8 +25,7 @@ public class TestBridgeFooterLinks {
 	ConfigUtility configUtility;
 	String url = "";
 	String homePage = ("https://www.getbridge.com");
-	ExtentReports extent;
-	ExtentTest logger;
+	GenerateTestReport generateTestReport = new GenerateTestReport(driver);
 
 	public Map<Long, WebDriver> driverMap = new ConcurrentHashMap();
 	public WebDriverWait wait;
@@ -35,6 +34,11 @@ public class TestBridgeFooterLinks {
 	@BeforeClass
 	public void setupTestClass() {
 		configUtility = new ConfigUtility();
+	}
+
+	@AfterSuite
+	public void doAfterSuite() {
+		generateTestReport.flushReport(driver);
 	}
 
 	@BeforeMethod
@@ -56,33 +60,12 @@ public class TestBridgeFooterLinks {
 		driver.get(homePage);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0, 50000)", "");
-
-		extent = new ExtentReports("src/main/resources/extentReport.html", true);
-		extent.addSystemInfo("Host Name", "Bridge Testing").addSystemInfo("Environment", "Automation Testing")
-				.addSystemInfo("User Name", "Pravin Ray")
-				.addSystemInfo("OS Architecture", System.getProperty("os.arch"));
-		Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
-		String browserName = cap.getBrowserName();
-		String browserVersion = cap.getVersion().toString();
-		extent.addSystemInfo("Browser Name", browserName).addSystemInfo("Browser Version", browserVersion);
-		extent.loadConfig(new File("src/main/resources/extent-config.xml"));
-
-		// start logging for report generation
-		logger = extent.startTest(method.getName());
+		generateTestReport.startReport(method);
 	}
 
 	@AfterMethod
 	public void tearDownTestMethod(ITestResult result) {
-		if (result.getStatus() == ITestResult.FAILURE) {
-			logger.log(LogStatus.FAIL, "Test Case Failed is " + result.getName());
-			logger.log(LogStatus.FAIL, "Test Case Failed error is " + result.getThrowable());
-		} else if (result.getStatus() == ITestResult.SKIP) {
-			logger.log(LogStatus.SKIP, "Test Case Skipped is " + result.getName());
-		} else if (result.getStatus() == ITestResult.SUCCESS) {
-			logger.log(LogStatus.PASS, "Test Case Passed is " + result.getName());
-		}
-		extent.endTest(logger);
-		extent.flush();
+		generateTestReport.getReport(result);
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}

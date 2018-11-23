@@ -20,7 +20,7 @@ public class RequestDemoForm extends BasePageObject {
 	@FindBy(className = "Phone_Number_2__c")
 	WebElement phoneField;
 
-	@FindBy(id = "Country373000453")
+	@FindBy(name = "Country")
 	WebElement countryField;
 
 	@FindBy(className = "Company")
@@ -29,7 +29,7 @@ public class RequestDemoForm extends BasePageObject {
 	@FindBy(className = "Title")
 	WebElement jobField;
 
-	@FindBy(id = "estimatedUsers373000453")
+	@FindBy(name = "estimatedUsers")
 	WebElement estimatedUsers;
 
 	@FindBy(xpath = "//*[@id=\"block-mainpagecontent-2\"]/article/div/div/div/div[3]/form/fieldset[2]/button")
