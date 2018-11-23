@@ -5,37 +5,6 @@
         <parameter name="browser" value="chrome" />
         <parameter name="isGrid" value="false" />
             <classes>
-                <class name="com.sevadevelopment.instructure.tests.TestBridgeFooterLinks" >
-                    <methods>
-                        <exclude name="verifyAccessibilityUrl"/>
-                        <exclude name="verifyPrivacyPolicyUrl"/>
-                        <exclude name="verifyTermsOfUseUrl"/>
-                        <exclude name="verifyContactSalesUrl"/>
-                        <exclude name="verifyManagementUrl"/>
-                        <exclude name="verifyTimelineModuleUrl"/>
-                        <exclude name="verifySkillsAsseessmentUrl"/>
-                        <exclude name="verifyGoalsAndTasksUrl"/>
-                        <exclude name="verifyRobustReportingUrl"/>
-                        <exclude name="verifyRetainUrl"/>
-                        <exclude name="verifyContentServicesUrl"/>
-                        <exclude name="verifyOffTheShelfCoursesUrl"/>
-                        <exclude name="verifyArcVideoUrl"/>
-                        <exclude name="verifyLearnFromYourLearningUrl"/>
-                        <exclude name="verifyManagerDashboardUrl"/>
-                        <exclude name="verifyAdminUrl"/>
-                        <exclude name="verifyEasyToUseUrl"/>
-                        <exclude name="verifyAnytimeAnywhereUrl"/>
-                        <exclude name="verifyContactTelephoneEmailAndLocation"/>
-                        <exclude name="verifySocialNetworkPagesUrl"/>
-                        <exclude name="verifyBottomSupportTermsUrl"/>
-                        <exclude name="verifyBottomPrivacyPolicyUrl"/>
-                        <exclude name="verifyBottomTermsOfUseUrl"/>
-                        <exclude name="verifyBottomAccessibilityUrl"/>
-                        <exclude name="verifyBottomGDPRUrl"/>
-                        <exclude name="verifyBottomNewsUrl"/>
-                    </methods>
-                </class>
-
                 <class name="com.sevadevelopment.instructure.tests.TestBridgeTopNavLinks">
                     <methods>
                         <include name="checkAlllinks"/>
@@ -63,36 +32,6 @@
         <parameter name="browser" value="firefox" />
         <parameter name="isGrid" value="false" />
             <classes>
-                <class name="com.sevadevelopment.instructure.tests.TestBridgeFooterLinks" >
-                    <methods>
-                        <exclude name="verifyAccessibilityUrl"/>
-                        <exclude name="verifyPrivacyPolicyUrl"/>
-                        <exclude name="verifyTermsOfUseUrl"/>
-                        <exclude name="verifyContactSalesUrl"/>
-                        <exclude name="verifyManagementUrl"/>
-                        <exclude name="verifyTimelineModuleUrl"/>
-                        <exclude name="verifySkillsAsseessmentUrl"/>
-                        <exclude name="verifyGoalsAndTasksUrl"/>
-                        <exclude name="verifyRobustReportingUrl"/>
-                        <exclude name="verifyRetainUrl"/>
-                        <exclude name="verifyContentServicesUrl"/>
-                        <exclude name="verifyOffTheShelfCoursesUrl"/>
-                        <exclude name="verifyArcVideoUrl"/>
-                        <exclude name="verifyLearnFromYourLearningUrl"/>
-                        <exclude name="verifyManagerDashboardUrl"/>
-                        <exclude name="verifyAdminUrl"/>
-                        <exclude name="verifyEasyToUseUrl"/>
-                        <exclude name="verifyAnytimeAnywhereUrl"/>
-                        <exclude name="verifyContactTelephoneEmailAndLocation"/>
-                        <exclude name="verifySocialNetworkPagesUrl"/>
-                        <exclude name="verifyBottomSupportTermsUrl"/>
-                        <exclude name="verifyBottomPrivacyPolicyUrl"/>
-                        <exclude name="verifyBottomTermsOfUseUrl"/>
-                        <exclude name="verifyBottomAccessibilityUrl"/>
-                        <exclude name="verifyBottomGDPRUrl"/>
-                        <exclude name="verifyBottomNewsUrl"/>
-                    </methods>
-                </class>
                 <class name="com.sevadevelopment.instructure.tests.TestBridgeTopNavLinks" >
                     <methods>
                         <include name="checkAlllinks"/>

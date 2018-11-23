@@ -18,7 +18,7 @@ public class SeleniumDriverFactory  {
 		if (browser.equals("firefox")) {
 			try {
 				if(isGrid) {
-					tlDriver.set(new RemoteWebDriver(new URL("http://localhost:5555/wd/hub"), optionsManager.getFirefoxOptions()));
+					tlDriver.set(new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), optionsManager.getFirefoxOptions()));
 					System.out.println("Test  running in FIREFOX container");
 				}
 				else {
@@ -37,7 +37,7 @@ public class SeleniumDriverFactory  {
 		} else if (browser.equals("chrome")) {
 			try {
 				if(isGrid) {
-					tlDriver.set(new RemoteWebDriver(new URL("http://localhost:5555/wd/hub"), optionsManager.getChromeOptions()));
+					tlDriver.set(new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), optionsManager.getChromeOptions()));
 					System.out.println("Test  running in CHROME container");
 				}
 				else {

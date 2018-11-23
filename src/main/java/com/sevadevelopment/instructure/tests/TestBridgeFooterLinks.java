@@ -87,8 +87,8 @@ public class TestBridgeFooterLinks {
 		driver.quit();
 	}
 
-	@Test(priority = 1)
-	public void verifyAccessibilityUrl() throws Exception {
+	@Test
+	public void verifyAccessibilityUrl() {
 		bridgePageFooter.clickOnAccessibilityLink();
 		String accessibilityUrl = driver.getCurrentUrl();
 		System.out.println(accessibilityUrl);
@@ -101,7 +101,7 @@ public class TestBridgeFooterLinks {
 		Assert.assertTrue(accessibilityRedirectedPage.contains("Web Content Accessibility Guidelines 2.0"));
 	}
 
-	@Test(priority = 2)
+	@Test
 	public void verifyPrivacyPolicyUrl() {
 		bridgePageFooter.clickOnPrivacyPolicyLink();
 		String accessibilityUrl = driver.getCurrentUrl();
@@ -113,7 +113,7 @@ public class TestBridgeFooterLinks {
 		Assert.assertTrue(privacyPolicyRedirectedPage.contains("Instructure Privacy Policy"));
 	}
 
-	@Test(priority = 3)
+	@Test
 	public void verifyTermsOfUseUrl() {
 		bridgePageFooter.clickOnTermsOfUse();
 		String termsOfUseUrl = driver.getCurrentUrl();
@@ -126,7 +126,7 @@ public class TestBridgeFooterLinks {
 				driver.findElement(By.className("PRbody")).getText().contains("Agreement between You and Instructure"));
 	}
 
-	@Test(priority = 4)
+	@Test
 	public void verifyContactSalesUrl() throws Exception {
 		String contactSalesNumber = driver.findElement(By.xpath("//*[@id=\"footer-top-links\"]/div/a[4]"))
 				.getAttribute("href");
@@ -134,7 +134,7 @@ public class TestBridgeFooterLinks {
 		Assert.assertEquals(contactSalesNumber, "tel:+1-877-576-5364");
 	}
 
-	@Test(priority = 5)
+	@Test
 	public void verifyManagementUrl() {
 		bridgePageFooter.clickOnManagement();
 		String managementUrl = driver.getCurrentUrl();
@@ -147,7 +147,7 @@ public class TestBridgeFooterLinks {
 		Assert.assertTrue(managementRedirectedPage.contains("Continuous 1:1 Management"));
 	}
 
-	@Test(priority = 6)
+	@Test
 	public void verifyTimelineModuleUrl() {
 		bridgePageFooter.clickOnTimelineModule();
 		String timelineModuleUrl = driver.getCurrentUrl();
@@ -159,7 +159,7 @@ public class TestBridgeFooterLinks {
 		Assert.assertTrue(timelineModuleRedirectedPage.contains("Employee Timeline"));
 	}
 
-	@Test(priority = 7)
+	@Test
 	public void verifySkillsAsseessmentUrl() {
 		bridgePageFooter.clickOnSkillsAssessment();
 		String skillsAsseessmentUrl = driver.getCurrentUrl();
@@ -171,7 +171,7 @@ public class TestBridgeFooterLinks {
 		Assert.assertTrue(skillsAssessmentRedirectedPage.contains("Skills Assessment"));
 	}
 
-	@Test(priority = 8)
+	@Test
 	public void verifyGoalsAndTasksUrl() {
 		bridgePageFooter.clickOnGoalsAndTasks();
 		String goalsAndTasksUrl = driver.getCurrentUrl();
@@ -183,7 +183,7 @@ public class TestBridgeFooterLinks {
 		Assert.assertTrue(goalsAndTasksRedirectedPage.contains("Goals and Tasks"));
 	}
 
-	@Test(priority = 9)
+	@Test
 	public void verifyRobustReportingUrl() {
 		bridgePageFooter.clickOnRobustReporting();
 		String robustReportingUrl = driver.getCurrentUrl();
@@ -195,7 +195,7 @@ public class TestBridgeFooterLinks {
 		Assert.assertTrue(robustReportingRedirectedPage.contains("Robust Reporting"));
 	}
 
-	@Test(priority = 10)
+	@Test
 	public void verifyRetainUrl() {
 		bridgePageFooter.clickOnRetain();
 		String retainUrl = driver.getCurrentUrl();
@@ -207,7 +207,7 @@ public class TestBridgeFooterLinks {
 		Assert.assertTrue(retainRedirectedPage.contains("Retain"));
 	}
 
-	@Test(priority = 11)
+	@Test
 	public void verifyContentServicesUrl() {
 		bridgePageFooter.clickOnContentServices();
 		String contentServicesUrl = driver.getCurrentUrl();
@@ -219,7 +219,7 @@ public class TestBridgeFooterLinks {
 		Assert.assertTrue(contentServicesRedirectedPage.contains("Content Services"));
 	}
 
-	@Test(priority = 12)
+	@Test
 	public void verifyOffTheShelfCoursesUrl() {
 		bridgePageFooter.clickOnOffTheShelfCourses();
 		String offTheShelfCoursesUrl = driver.getCurrentUrl();
@@ -231,7 +231,7 @@ public class TestBridgeFooterLinks {
 		Assert.assertTrue(offTheShelfCoursesRedirectedPage.contains("Off-the-Shelf-Courses"));
 	}
 
-	@Test(priority = 13)
+	@Test
 	public void verifyArcVideoUrl() {
 		bridgePageFooter.clickOnArcVideo();
 		String arcVideoUrl = driver.getCurrentUrl();
@@ -243,7 +243,7 @@ public class TestBridgeFooterLinks {
 		Assert.assertTrue(arcVideoRedirectedPage.contains("Arc Video"));
 	}
 
-	@Test(priority = 14)
+	@Test
 	public void verifyLearnFromYourLearningUrl() {
 		bridgePageFooter.clickOnLearnFromYourLearning();
 		String learnFromYourLearningUrl = driver.getCurrentUrl();
@@ -255,7 +255,7 @@ public class TestBridgeFooterLinks {
 		Assert.assertTrue(learnMoreRedirectedPage.contains("Learn from your Learning"));
 	}
 
-	@Test(priority = 15)
+	@Test
 	public void verifyManagerDashboardUrl() {
 		bridgePageFooter.clickOnManagerDashboard();
 		String managerDashboardUrl = driver.getCurrentUrl();
@@ -267,7 +267,7 @@ public class TestBridgeFooterLinks {
 		Assert.assertTrue(managerDashboardRedirectedPage.contains("Manager Dashboard"));
 	}
 
-	@Test(priority = 16)
+	@Test
 	public void verifyAdminUrl() {
 		bridgePageFooter.clickOnAdmin();
 		String adminUrl = driver.getCurrentUrl();
@@ -279,7 +279,7 @@ public class TestBridgeFooterLinks {
 		Assert.assertTrue(adminRedirectedPage.contains("Admin"));
 	}
 
-	@Test(priority = 17)
+	@Test
 	public void verifyEasyToUseUrl() {
 		bridgePageFooter.clickOnEasyToUse();
 		String easyToUseUrl = driver.getCurrentUrl();
@@ -291,7 +291,7 @@ public class TestBridgeFooterLinks {
 		Assert.assertTrue(easyToUseRedirectedPage.contains("Easy to Use, Easy to Love"));
 	}
 
-	@Test(priority = 18)
+	@Test
 	public void verifyAnytimeAnywhereUrl() {
 		bridgePageFooter.clickOnAnytimeAnywhere();
 		String anytimeAnywhereUrl = driver.getCurrentUrl();
@@ -303,7 +303,7 @@ public class TestBridgeFooterLinks {
 		Assert.assertTrue(anytimeAnywhereRedirectedPage.contains("Anytime, Anywhere Learning"));
 	}
 
-	@Test(priority = 19)
+	@Test
 	public void verifyContactTelephoneEmailAndLocation() {
 		String contactTelNo = driver.findElement(By.xpath("//*[@id=\"footer-phone\"]/a")).getAttribute("href");
 		Assert.assertEquals(contactTelNo, "tel:+1877.576.5364");
@@ -321,7 +321,7 @@ public class TestBridgeFooterLinks {
 		Assert.assertEquals(contactLocationText2, "Salt Lake City, UT 84121");
 	}
 
-	@Test(priority = 20)
+	@Test
 	public void verifySocialNetworkPagesUrl() {
 		String fbUrl = driver.findElement(By.xpath("//*[@id=\"footer-social-icons\"]/a[1]")).getAttribute("href");
 		Assert.assertEquals(fbUrl, "https://www.facebook.com/GetBridge/");
@@ -336,7 +336,7 @@ public class TestBridgeFooterLinks {
 		Assert.assertEquals(linkedinUrl, "https://www.linkedin.com/showcase/get-bridge/");
 	}
 
-	@Test(priority = 21)
+	@Test
 	public void verifyBottomSupportTermsUrl() {
 		bridgePageFooter.clickOnSupportTerms();
 		String supportTermsUrl = driver.getCurrentUrl();
@@ -349,7 +349,7 @@ public class TestBridgeFooterLinks {
 		Assert.assertTrue(supportTermsRedirectedPage.contains("Support Terms"));
 	}
 
-	@Test(priority = 22)
+	@Test
 	public void verifyBottomPrivacyPolicyUrl() {
 		bridgePageFooter.clickOnBottomPrivacyPolicy();
 		String bottomPrivacyPolicyUrl = driver.getCurrentUrl();
@@ -360,7 +360,7 @@ public class TestBridgeFooterLinks {
 		Assert.assertTrue(privacyPolicyRedirectedPage.contains("Instructure Privacy Policy"));
 	}
 
-	@Test(priority = 23)
+	@Test
 	public void verifyBottomTermsOfUseUrl() {
 		bridgePageFooter.clickOnBottomTermsOfUse();
 		String bottomTermsOfUseUrl = driver.getCurrentUrl();
@@ -372,7 +372,7 @@ public class TestBridgeFooterLinks {
 		Assert.assertTrue(supportTermsRedirectedPage.contains("Terms of Use"));
 	}
 
-	@Test(priority = 24)
+	@Test
 	public void verifyBottomAccessibilityUrl() {
 		bridgePageFooter.clickOnBottomAccessibility();
 		String bottomAccessibilityUrl = driver.getCurrentUrl();
@@ -387,7 +387,7 @@ public class TestBridgeFooterLinks {
 		Assert.assertTrue(bottomAccessibilityRedirectedPage.contains("Web Content Accessibility Guidelines 2.0"));
 	}
 
-	@Test(priority = 25)
+	@Test
 	public void verifyBottomGDPRUrl() {
 		bridgePageFooter.clickOnBottomGDPR();
 		String bottomGDPRUrl = driver.getCurrentUrl();
@@ -399,7 +399,7 @@ public class TestBridgeFooterLinks {
 		Assert.assertTrue(bottomGDPRRedirectedPage.contains("THE GENERAL DATA PROTECTION REGULATION (GDPR)"));
 	}
 
-	@Test(priority = 26)
+	@Test
 	public void verifyBottomNewsUrl() {
 		bridgePageFooter.clickOnBottomNews();
 		String bottomNewsUrl = driver.getCurrentUrl();
