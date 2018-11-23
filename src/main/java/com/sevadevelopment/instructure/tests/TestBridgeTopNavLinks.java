@@ -30,7 +30,7 @@ public class TestBridgeTopNavLinks {
 	String url = "";
 	HttpURLConnection huc = null;
 	int respCode = 200;
-	GenerateTestReport generateTestReport = new GenerateTestReport(driver);
+	//GenerateTestReport generateTestReport = new GenerateTestReport(driver);
 	String homePage = "https://www.getbridge.com";
 
 	public Map<Long, WebDriver> driverMap = new ConcurrentHashMap();
@@ -42,12 +42,12 @@ public class TestBridgeTopNavLinks {
 
 	@AfterSuite
 	public void doAfterSuite() {
-		generateTestReport.flushReport(driver);
+		///generateTestReport.flushReport(driver);
 	}
 
 	@BeforeMethod
 	@Parameters({ "browser", "isGrid" })
-	public void setupTestMethod(String browser, boolean isGrid, Method method) throws Exception {
+	public void setupTestMethod(String browser, boolean isGrid) throws Exception {
 		System.out.println("Before Method started ::" + Thread.currentThread().getId());
 		SeleniumDriverFactory.setDriver(browser, isGrid);
 
@@ -60,13 +60,13 @@ public class TestBridgeTopNavLinks {
 
 		driver.manage().window().maximize();
 		driver.get(homePage);
-		generateTestReport.startReport(method);
+		//generateTestReport.startReport(method);
 	}
 
 	@AfterMethod
 	public void tearDownTestMethod(ITestResult result) {
 		System.out.println("After Method started");
-		generateTestReport.getReport(result);
+		//generateTestReport.getReport(result);
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}

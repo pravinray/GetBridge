@@ -24,7 +24,7 @@ public class VideoPlayerDemo {
 	WebDriver driver;
 	ConfigUtility configUtility;
 	String homePage = ("https://www.getbridge.com");
-	GenerateTestReport generateTestReport = new GenerateTestReport(driver);
+	//GenerateTestReport generateTestReport = new GenerateTestReport(driver);
 
 	public Map<Long, WebDriver> driverMap = new ConcurrentHashMap();
 	public WebDriverWait wait;
@@ -37,7 +37,7 @@ public class VideoPlayerDemo {
 
 	@AfterSuite
 	public void doAfterSuite() {
-		generateTestReport.flushReport(driver);
+		//generateTestReport.flushReport(driver);
 	}
 
 	@BeforeMethod
@@ -54,12 +54,12 @@ public class VideoPlayerDemo {
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0, 400)", "");
-		generateTestReport.startReport(method);
+		//generateTestReport.startReport(method);
 	}
 
 	@AfterMethod
 	public void tearDownTestMethod(ITestResult result) {
-		generateTestReport.getReport(result);
+		//generateTestReport.getReport(result);
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}

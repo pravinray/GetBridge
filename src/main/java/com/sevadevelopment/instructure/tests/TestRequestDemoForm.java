@@ -26,7 +26,7 @@ public class TestRequestDemoForm {
 	String xlFilePath = "src/main/resources/testData/names.xlsx";
 	String sheetName = "Sheet2";
 	String homePage = ("https://www.getbridge.com");
-	GenerateTestReport generateTestReport = new GenerateTestReport(driver);
+	//GenerateTestReport generateTestReport = new GenerateTestReport(driver);
 
 	public Map<Long, WebDriver> driverMap = new ConcurrentHashMap();
 	public WebDriverWait wait;
@@ -39,12 +39,12 @@ public class TestRequestDemoForm {
 
 	@AfterSuite
 	public void doAfterSuite() {
-		generateTestReport.flushReport(driver);
+		//generateTestReport.flushReport(driver);
 	}
 
 	@BeforeMethod
 	@Parameters({"browser","isGrid"})
-	public void setupTestMethod(String browser, boolean isGrid, Method method) throws Exception {
+	public void setupTestMethod(String browser, boolean isGrid) throws Exception {
 		System.out.println("Before Method started ::"+Thread.currentThread().getId());
 		SeleniumDriverFactory.setDriver(browser,isGrid);
 
@@ -57,12 +57,12 @@ public class TestRequestDemoForm {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0, 50000)", "");
 		
-		generateTestReport.startReport(method);
+		//generateTestReport.startReport(method);
 	}
 
 	@AfterMethod
 	public void tearDownTestMethod(ITestResult result) {
-		generateTestReport.getReport(result);
+		//generateTestReport.getReport(result);
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}
