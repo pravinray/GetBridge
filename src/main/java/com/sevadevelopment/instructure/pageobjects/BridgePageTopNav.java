@@ -30,6 +30,15 @@ public class BridgePageTopNav extends BasePageObject{
 	@FindBy(id="ga-standard-nav-demo")
 	WebElement bookADemoTab;
 	
+	@FindBy(xpath="//*[@id=\"page-title\"]/h2")
+	WebElement productPopUpTitle;
+	
+	@FindBy(xpath="//*[@id=\"tabs\"]")
+	WebElement productPopUpOptions;
+
+	@FindBy(xpath="//*[@id=\"block-mainpagecontent-2\"]/article/div/div/div/section[1]/h1")
+	WebElement productPageTitle;
+
 
 	public BridgePageTopNav(WebDriver driver) {
 			super(driver);
@@ -103,5 +112,16 @@ public class BridgePageTopNav extends BasePageObject{
 						ExpectedConditions.visibilityOf(bookADemoTab)
 				)
 		).build().perform();
+	}
+	public String getTextProductPopUpTitle() {
+		return productPopUpTitle.getText();
+	}
+	
+	public String getTextProductPopUpOptions() {
+		return productPopUpOptions.getText();
+	}
+	
+	public String getTextProductPageTitle() {
+		return productPageTitle.getText();
 	}
 }

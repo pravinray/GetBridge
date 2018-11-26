@@ -100,9 +100,9 @@ public class TestBridgeTopNavLinks {
 
 		// hover on tab and verify its contents
 		bridgePageTopNav.hoverOnProductTab();
-		String popUpTitle = driver.findElement(By.xpath("//*[@id=\"page-title\"]/h2")).getText();
+		String popUpTitle = bridgePageTopNav.getTextProductPopUpTitle();
 		Assert.assertTrue(popUpTitle.contains("Explore the Bridge Suite"));
-		String popUpOptions = driver.findElement(By.xpath("//*[@id=\"tabs\"]")).getText();
+		String popUpOptions =bridgePageTopNav.getTextProductPopUpOptions();
 		System.out.println(popUpOptions);
 		Assert.assertTrue(popUpOptions.contains("LEARN"));
 		Assert.assertTrue(popUpOptions.contains("PERFORM"));
@@ -113,13 +113,11 @@ public class TestBridgeTopNavLinks {
 		String productUrl = driver.getCurrentUrl();
 		System.out.println(productUrl);
 		Assert.assertEquals(productUrl, "https://www.getbridge.com/products");
-		String productPageTitle = driver
-				.findElement(By.xpath("//*[@id=\"block-mainpagecontent-2\"]/article/div/div/div/section[1]/h1"))
-				.getText();
+		String productPageTitle = bridgePageTopNav.getTextProductPageTitle();
 		Assert.assertEquals(productPageTitle, "The Bridge Suite");
 	}
 
-	// *[@id="solutions-page"]/div
+	
 	@Test
 	public void verifySolutionsUrl() {
 		bridgePageTopNav.hoverOnSolutionsTab();
