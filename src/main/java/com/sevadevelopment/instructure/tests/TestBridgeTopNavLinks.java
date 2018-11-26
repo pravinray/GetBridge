@@ -94,29 +94,10 @@ public class TestBridgeTopNavLinks extends BaseTest{
 		System.out.println("=== after pageobject initialization ====");
 
 		// hover on tab and verify its contents
-<<<<<<< HEAD
-				bridgePageTopNav.hoverOnProductTab();
-				String popUpTitle = bridgePageTopNav.getTextProductPopUpTitle();
-				Assert.assertTrue(popUpTitle.contains("Explore the Bridge Suite"));
-				String popUpOptions =bridgePageTopNav.getTextProductPopUpOptions();
-				System.out.println(popUpOptions);
-				Assert.assertTrue(popUpOptions.contains("LEARN"));
-				Assert.assertTrue(popUpOptions.contains("PERFORM"));
-				Assert.assertTrue(popUpOptions.contains("PRACTICE"));
-
-				// click on tab and verify the redirected page URL and contents
-				bridgePageTopNav.clickOnProductTab();
-				String productUrl = driver.getCurrentUrl();
-				System.out.println(productUrl);
-				Assert.assertEquals(productUrl, "https://www.getbridge.com/products");
-				String productPageTitle = bridgePageTopNav.getTextProductPageTitle();
-				Assert.assertEquals(productPageTitle, "The Bridge Suite");
-
-=======
 		bridgePageTopNav.hoverOnProductTab();
-		/*String popUpTitle = driver.findElement(By.xpath("//*[@id=\"page-title\"]/h2")).getText();
+		String popUpTitle = bridgePageTopNav.getTextProductPopUpTitle();
 		Assert.assertTrue(popUpTitle.contains("Explore the Bridge Suite"));
-		String popUpOptions = driver.findElement(By.xpath("//*[@id=\"tabs\"]")).getText();
+		String popUpOptions =bridgePageTopNav.getTextProductPopUpOptions();
 		System.out.println(popUpOptions);
 		Assert.assertTrue(popUpOptions.contains("LEARN"));
 		Assert.assertTrue(popUpOptions.contains("PERFORM"));
@@ -127,11 +108,9 @@ public class TestBridgeTopNavLinks extends BaseTest{
 		String productUrl = driver.getCurrentUrl();
 		System.out.println(productUrl);
 		Assert.assertEquals(productUrl, "https://www.getbridge.com/products");
-		String productPageTitle = driver
-				.findElement(By.xpath("//*[@id=\"block-mainpagecontent-2\"]/article/div/div/div/section[1]/h1"))
-				.getText();
-		Assert.assertEquals(productPageTitle, "The Bridge Suite");*/
->>>>>>> af7bce4ede142be0a150b4e8042ca5a6c64f4ba9
+		String productPageTitle = bridgePageTopNav.getTextProductPageTitle();
+		Assert.assertEquals(productPageTitle, "The Bridge Suite");
+
 	}
 
 	@Test
