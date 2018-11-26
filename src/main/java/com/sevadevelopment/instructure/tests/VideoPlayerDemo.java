@@ -1,24 +1,20 @@
 package com.sevadevelopment.instructure.tests;
 
-import static org.testng.Assert.assertTrue;
-
-import java.lang.reflect.Method;
-
-import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.ITestResult;
-import org.testng.annotations.*;
-
 import com.sevadevelopment.utility.ConfigUtility;
-import com.sevadevelopment.utility.GenerateTestReport;
 import com.sevadevelopment.utility.SeleniumDriverFactory;
-
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.testng.ITestResult;
+import org.testng.annotations.*;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.lang.reflect.Method;
+
+import static org.testng.Assert.assertTrue;
 
 public class VideoPlayerDemo {
 	WebDriver driver;
@@ -26,9 +22,6 @@ public class VideoPlayerDemo {
 	String homePage = ("https://www.getbridge.com");
 	//GenerateTestReport generateTestReport = new GenerateTestReport(driver);
 
-	public Map<Long, WebDriver> driverMap = new ConcurrentHashMap();
-	public WebDriverWait wait;
-	public SeleniumDriverFactory tlDriverFactory = new SeleniumDriverFactory();
 
 	@BeforeClass
 	public void setupTestClass() {
@@ -46,8 +39,7 @@ public class VideoPlayerDemo {
 		System.out.println("Before Method started ::"+Thread.currentThread().getId());
 		SeleniumDriverFactory.setDriver(browser, isGrid);
 
-		driverMap.put(Thread.currentThread().getId(),SeleniumDriverFactory.getDriver());
-		driver = driverMap.get(Long.valueOf(Thread.currentThread().getId()));
+		driver = SeleniumDriverFactory.getDriver();
 
 		driver.manage().window().setSize(new Dimension(1024, 768));
 		driver.get(homePage);

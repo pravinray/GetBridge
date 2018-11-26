@@ -1,23 +1,16 @@
 
 package com.sevadevelopment.instructure.tests;
 
-import java.lang.reflect.Method;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
+import com.sevadevelopment.instructure.pageobjects.BridgePageFooter;
+import com.sevadevelopment.utility.ConfigUtility;
+import com.sevadevelopment.utility.SeleniumDriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
-
-import com.sevadevelopment.instructure.pageobjects.BridgePageFooter;
-import com.sevadevelopment.utility.ConfigUtility;
-import com.sevadevelopment.utility.GenerateTestReport;
-import com.sevadevelopment.utility.SeleniumDriverFactory;
 
 public class TestBridgeFooterLinks {
 	WebDriver driver;
@@ -26,10 +19,7 @@ public class TestBridgeFooterLinks {
 	String url = "";
 	String homePage = ("https://www.getbridge.com");
 	//GenerateTestReport generateTestReport = new GenerateTestReport(driver);
-
-	public Map<Long, WebDriver> driverMap = new ConcurrentHashMap();
-	public WebDriverWait wait;
-	public SeleniumDriverFactory tlDriverFactory = new SeleniumDriverFactory();
+	
 
 	@BeforeClass
 	public void setupTestClass() {
@@ -48,8 +38,6 @@ public class TestBridgeFooterLinks {
 		SeleniumDriverFactory.setDriver(browser,isGrid);
 
 		driver = SeleniumDriverFactory.getDriver();
-		driverMap.put(Thread.currentThread().getId(),SeleniumDriverFactory.getDriver());
-		driver = driverMap.get(Long.valueOf(Thread.currentThread().getId()));
 
 		driver.manage().window().maximize();
 		driver.get("https://www.getbridge.com");

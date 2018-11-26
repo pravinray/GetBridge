@@ -1,22 +1,15 @@
 package com.sevadevelopment.instructure.tests;
 
-import static org.testng.Assert.assertTrue;
-
-import java.lang.reflect.Method;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.ITestResult;
-import org.testng.annotations.*;
-
 import com.sevadevelopment.instructure.pageobjects.RequestDemoForm;
 import com.sevadevelopment.utility.ConfigUtility;
 import com.sevadevelopment.utility.ExcelUtility;
-import com.sevadevelopment.utility.GenerateTestReport;
 import com.sevadevelopment.utility.SeleniumDriverFactory;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.testng.ITestResult;
+import org.testng.annotations.*;
+
+import static org.testng.Assert.assertTrue;
 
 public class TestRequestDemoForm {
 
@@ -27,10 +20,6 @@ public class TestRequestDemoForm {
 	String sheetName = "Sheet2";
 	String homePage = ("https://www.getbridge.com");
 	//GenerateTestReport generateTestReport = new GenerateTestReport(driver);
-
-	public Map<Long, WebDriver> driverMap = new ConcurrentHashMap();
-	public WebDriverWait wait;
-	public SeleniumDriverFactory tlDriverFactory = new SeleniumDriverFactory();
 
 	@BeforeClass
 	public void setupTestClass() {
@@ -48,8 +37,6 @@ public class TestRequestDemoForm {
 		System.out.println("Before Method started ::"+Thread.currentThread().getId());
 		SeleniumDriverFactory.setDriver(browser,isGrid);
 
-		driverMap.put(Thread.currentThread().getId(),SeleniumDriverFactory.getDriver());
-		driver = driverMap.get(Long.valueOf(Thread.currentThread().getId()));
 
 		driver.manage().window().maximize();
 		driver.get(homePage);
