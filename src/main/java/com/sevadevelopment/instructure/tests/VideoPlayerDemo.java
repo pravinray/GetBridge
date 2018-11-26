@@ -1,6 +1,5 @@
 package com.sevadevelopment.instructure.tests;
 
-import com.sevadevelopment.utility.ConfigUtility;
 import com.sevadevelopment.utility.SeleniumDriverFactory;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -8,7 +7,6 @@ import io.restassured.specification.RequestSpecification;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
@@ -16,17 +14,8 @@ import java.lang.reflect.Method;
 
 import static org.testng.Assert.assertTrue;
 
-public class VideoPlayerDemo {
-	WebDriver driver;
-	ConfigUtility configUtility;
-	String homePage = ("https://www.getbridge.com");
+public class VideoPlayerDemo extends BaseTest{
 	//GenerateTestReport generateTestReport = new GenerateTestReport(driver);
-
-
-	@BeforeClass
-	public void setupTestClass() {
-		configUtility = new ConfigUtility();
-	}
 
 	@AfterSuite
 	public void doAfterSuite() {
@@ -35,7 +24,7 @@ public class VideoPlayerDemo {
 
 	@BeforeMethod
 	@Parameters({"browser","isGrid"})
-	public void setupTestMethod(String browser, boolean isGrid, Method method) throws Exception {
+	public void setupTestMethod(String browser, boolean isGrid, Method method) {
 		System.out.println("Before Method started ::"+Thread.currentThread().getId());
 		SeleniumDriverFactory.setDriver(browser, isGrid);
 

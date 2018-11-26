@@ -1,44 +1,27 @@
 
 package com.sevadevelopment.instructure.tests;
 
-import java.io.IOException;
-import java.lang.reflect.Method;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
+import com.sevadevelopment.instructure.pageobjects.BridgePageTopNav;
+import com.sevadevelopment.utility.SeleniumDriverFactory;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
-import com.sevadevelopment.instructure.pageobjects.BridgePageTopNav;
-import com.sevadevelopment.utility.ConfigUtility;
-import com.sevadevelopment.utility.GenerateTestReport;
-import com.sevadevelopment.utility.SeleniumDriverFactory;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Iterator;
+import java.util.List;
 
-public class TestBridgeTopNavLinks {
-	WebDriver driver;
-	BridgePageTopNav bridgePageTopNav;
-	ConfigUtility configUtility;
+public class TestBridgeTopNavLinks extends BaseTest{
+
 	String url = "";
 	HttpURLConnection huc = null;
 	int respCode = 200;
 	//GenerateTestReport generateTestReport = new GenerateTestReport(driver);
-	String homePage = "https://www.getbridge.com";
-
-	public Map<Long, WebDriver> driverMap = new ConcurrentHashMap();
-
-	@BeforeClass
-	public void doBeforeTest() {
-		configUtility = new ConfigUtility();
-	}
 
 	@AfterSuite
 	public void doAfterSuite() {
@@ -47,16 +30,12 @@ public class TestBridgeTopNavLinks {
 
 	@BeforeMethod
 	@Parameters({ "browser", "isGrid" })
-	public void setupTestMethod(String browser, boolean isGrid) throws Exception {
+	public void setupTestMethod(String browser, boolean isGrid) {
 		System.out.println("Before Method started ::" + Thread.currentThread().getId());
 		SeleniumDriverFactory.setDriver(browser, isGrid);
-
-		/*
-		 * driverMap.put(Thread.currentThread().getId(),SeleniumDriverFactory.getDriver(
-		 * )); driver = driverMap.get(Long.valueOf(Thread.currentThread().getId()));
-		 */
-
 		driver = SeleniumDriverFactory.getDriver();
+
+
 
 		driver.manage().window().maximize();
 		driver.get(homePage);
@@ -73,6 +52,7 @@ public class TestBridgeTopNavLinks {
 
 	@Test
 	public void checkAlllinks() {
+		System.out.println("starting test checkAllLinks =====");
 		List<WebElement> links = driver.findElements(By.tagName("a"));
 		Iterator<WebElement> it = links.iterator();
 
@@ -109,8 +89,12 @@ public class TestBridgeTopNavLinks {
 
 	@Test
 	public void verifyProductTabInTopNav() {
+		System.out.println("=== before pageobject initialization ===="+driver);
+		BridgePageTopNav bridgePageTopNav = new BridgePageTopNav(driver);
+		System.out.println("=== after pageobject initialization ====");
 
 		// hover on tab and verify its contents
+<<<<<<< HEAD
 				bridgePageTopNav.hoverOnProductTab();
 				String popUpTitle = bridgePageTopNav.getTextProductPopUpTitle();
 				Assert.assertTrue(popUpTitle.contains("Explore the Bridge Suite"));
@@ -128,10 +112,32 @@ public class TestBridgeTopNavLinks {
 				String productPageTitle = bridgePageTopNav.getTextProductPageTitle();
 				Assert.assertEquals(productPageTitle, "The Bridge Suite");
 
+=======
+		bridgePageTopNav.hoverOnProductTab();
+		/*String popUpTitle = driver.findElement(By.xpath("//*[@id=\"page-title\"]/h2")).getText();
+		Assert.assertTrue(popUpTitle.contains("Explore the Bridge Suite"));
+		String popUpOptions = driver.findElement(By.xpath("//*[@id=\"tabs\"]")).getText();
+		System.out.println(popUpOptions);
+		Assert.assertTrue(popUpOptions.contains("LEARN"));
+		Assert.assertTrue(popUpOptions.contains("PERFORM"));
+		Assert.assertTrue(popUpOptions.contains("PRACTICE"));
+
+		// click on tab and verify the redirected page URL and contents
+		bridgePageTopNav.clickOnProductTab();
+		String productUrl = driver.getCurrentUrl();
+		System.out.println(productUrl);
+		Assert.assertEquals(productUrl, "https://www.getbridge.com/products");
+		String productPageTitle = driver
+				.findElement(By.xpath("//*[@id=\"block-mainpagecontent-2\"]/article/div/div/div/section[1]/h1"))
+				.getText();
+		Assert.assertEquals(productPageTitle, "The Bridge Suite");*/
+>>>>>>> af7bce4ede142be0a150b4e8042ca5a6c64f4ba9
 	}
 
 	@Test
 	public void verifySolutionsUrl() {
+		BridgePageTopNav bridgePageTopNav = new BridgePageTopNav(driver);
+
 		bridgePageTopNav.hoverOnSolutionsTab();
 		String popUpOptions1 = bridgePageTopNav.getTextSolutionsPopUpOptions1();
 		System.out.println(popUpOptions1);
@@ -149,6 +155,8 @@ public class TestBridgeTopNavLinks {
 
 	@Test
 	public void verifyCustomerStoriesUrl() {
+		BridgePageTopNav bridgePageTopNav = new BridgePageTopNav(driver);
+
 		bridgePageTopNav.hoverOnCustomerStoriesTab();
 		String popUpOptions1 = bridgePageTopNav.getTextCustomerStoriesPopUpOptions1();
 		System.out.println(popUpOptions1);
@@ -169,6 +177,8 @@ public class TestBridgeTopNavLinks {
 
 	@Test
 	public void verifyResourcesUrl() {
+		BridgePageTopNav bridgePageTopNav = new BridgePageTopNav(driver);
+
 		System.out.println("This Test is being Executed 1");
 		bridgePageTopNav.hoverOnResourcesTab();
 		String popUpOptions1 = bridgePageTopNav.getTextResourcesPopUpOptions1();
@@ -191,6 +201,8 @@ public class TestBridgeTopNavLinks {
 
 	@Test
 	public void verifyAboutUrl() {
+		BridgePageTopNav bridgePageTopNav = new BridgePageTopNav(driver);
+
 		System.out.println("This Test is being Executed 2");
 		bridgePageTopNav.hoverOnAboutTab();
 		String popUpOptions1 = bridgePageTopNav.getTextAboutPopUpOptions1();
@@ -216,6 +228,8 @@ public class TestBridgeTopNavLinks {
 
 	@Test
 	public void verifyBlogUrl() {
+		BridgePageTopNav bridgePageTopNav = new BridgePageTopNav(driver);
+
 		System.out.println("This Test is being Executed 3");
 		bridgePageTopNav.clickOnBlogLink();
 		String blogUrl = driver.getCurrentUrl();
@@ -226,6 +240,8 @@ public class TestBridgeTopNavLinks {
 
 	@Test
 	public void verifyBookADemoUrl() {
+		BridgePageTopNav bridgePageTopNav = new BridgePageTopNav(driver);
+
 		System.out.println("This Test is being Executed 4");
 		bridgePageTopNav.clickOnBookADemoLink();
 		String bookADemoUrl = driver.getCurrentUrl();

@@ -96,11 +96,13 @@ public class BridgePageTopNav extends BasePageObject{
 		webDriverWait.until(ExpectedConditions.elementToBeClickable(productTab)).click();
 	}
 	public void hoverOnProductTab() {
+		System.out.println("Pageobject method started = hovering ");
 		(new Actions(driver)).moveToElement(
 				webDriverWait.until(
 						ExpectedConditions.visibilityOf(productTab)
 				)
 		).build().perform();
+		System.out.println("Pageobject method ended");
 	}
 	public  void clickOnSolutionsLink() {
 		webDriverWait.until(ExpectedConditions.elementToBeClickable(solutionsTab)).click();
