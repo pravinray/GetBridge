@@ -1,30 +1,19 @@
 package com.sevadevelopment.instructure.tests;
 
 import com.sevadevelopment.instructure.pageobjects.RequestDemoForm;
-import com.sevadevelopment.utility.ConfigUtility;
 import com.sevadevelopment.utility.ExcelUtility;
 import com.sevadevelopment.utility.SeleniumDriverFactory;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
 import static org.testng.Assert.assertTrue;
 
-public class TestRequestDemoForm {
-
-	ConfigUtility configUtility;
-	WebDriver driver;
+public class TestRequestDemoForm extends BaseTest{
 	RequestDemoForm requestDemoForm;
 	String xlFilePath = "src/main/resources/testData/names.xlsx";
 	String sheetName = "Sheet2";
-	String homePage = ("https://www.getbridge.com");
 	//GenerateTestReport generateTestReport = new GenerateTestReport(driver);
-
-	@BeforeClass
-	public void setupTestClass() {
-		configUtility = new ConfigUtility();
-	}
 
 	@AfterSuite
 	public void doAfterSuite() {
@@ -33,7 +22,7 @@ public class TestRequestDemoForm {
 
 	@BeforeMethod
 	@Parameters({"browser","isGrid"})
-	public void setupTestMethod(String browser, boolean isGrid) throws Exception {
+	public void setupTestMethod(String browser, boolean isGrid) {
 		System.out.println("Before Method started ::"+Thread.currentThread().getId());
 		SeleniumDriverFactory.setDriver(browser,isGrid);
 

@@ -2,29 +2,17 @@
 package com.sevadevelopment.instructure.tests;
 
 import com.sevadevelopment.instructure.pageobjects.BridgePageFooter;
-import com.sevadevelopment.utility.ConfigUtility;
 import com.sevadevelopment.utility.SeleniumDriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
-public class TestBridgeFooterLinks {
-	WebDriver driver;
+public class TestBridgeFooterLinks extends BaseTest {
 	BridgePageFooter bridgePageFooter;
-	ConfigUtility configUtility;
-	String url = "";
-	String homePage = ("https://www.getbridge.com");
 	//GenerateTestReport generateTestReport = new GenerateTestReport(driver);
-	
-
-	@BeforeClass
-	public void setupTestClass() {
-		configUtility = new ConfigUtility();
-	}
 
 	@AfterSuite
 	public void doAfterSuite() {
@@ -33,7 +21,7 @@ public class TestBridgeFooterLinks {
 
 	@BeforeMethod
 	@Parameters({"browser","isGrid"})
-	public void setupTestMethod(String browser, boolean isGrid) throws Exception {
+	public void setupTestMethod(String browser, boolean isGrid) {
 		System.out.println("Before Method started ::"+Thread.currentThread().getId());
 		SeleniumDriverFactory.setDriver(browser,isGrid);
 

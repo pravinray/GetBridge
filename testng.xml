@@ -7,8 +7,8 @@
             <classes>
                 <class name="com.sevadevelopment.instructure.tests.TestBridgeTopNavLinks">
                     <methods>
-                        <include name="checkAlllinks"/>
-                        <exclude name="verifyProductTabInTopNav"/>
+                        <exclude name="checkAlllinks"/>
+                        <include name="verifyProductTabInTopNav"/>
                         <exclude name="verifySolutionsUrl"/>
                         <exclude name="verifyCustomerStoriesUrl"/>
                         <exclude name="verifyResourcesUrl"/>
@@ -34,8 +34,8 @@
             <classes>
                 <class name="com.sevadevelopment.instructure.tests.TestBridgeTopNavLinks" >
                     <methods>
-                        <include name="checkAlllinks"/>
-                        <exclude name="verifyProductTabInTopNav"/>
+                        <exclude name="checkAlllinks"/>
+                        <include name="verifyProductTabInTopNav"/>
                         <exclude name="verifySolutionsUrl"/>
                         <exclude name="verifyCustomerStoriesUrl"/>
                         <exclude name="verifyResourcesUrl"/>
